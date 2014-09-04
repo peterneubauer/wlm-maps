@@ -114,9 +114,9 @@ function init() {
         autoPan: false,
     });
     map.addControl(sidebar);
-    setTimeout(function () {
+    /*setTimeout(function () {
         sidebar.show();
-    }, 500);
+    }, 500);*/
     sidebar.setContent('<h1>Wiki Loves Monuments</h1>' + 
         '<p><b>Welcome!</b> This is a map for the <a href="https://commons.wikimedia.org/wiki/Commons:Wiki_Loves_Monuments_2014">Wiki Loves Monument 2014</a> (<a href="http://www.wikilovesmonuments.org">blog</a>) photographic contest. Search monuments near to you, take photos and upload them!</p>' + 
         '<h3>Legend</h3>' + 
@@ -125,8 +125,8 @@ function init() {
         '<td><img src="icons/withoutimageicon.png" /></td><td>Monument without image</td></tr>' + 
         '</table>' + 
         '<h3>Statistics</h3>' + 
-        '<p>There are <a href="http://tools.wmflabs.org/wlm-stats">statistics</a> to compare with previous editions.</p>' + 
-        '<iframe src="http://tools.wmflabs.org/wlm-stats/stats-2014-mini.php" width=330px height=170px frameborder=0 scrolling=no style="margin-bottom: -20px;">Browser not compatible.</iframe>' +
+        '<p>There are <a href="//tools.wmflabs.org/wlm-stats">statistics</a> to compare with previous editions.</p>' + 
+        '<iframe src="//tools.wmflabs.org/wlm-stats/stats-2014-mini.php" width=330px height=170px frameborder=0 scrolling=no style="margin-bottom: -20px;">Browser not compatible.</iframe>' +
         '<h3>See also</h3>' + 
         '<ul style="margin-left: -20px;">' + 
         '<li><a href="http://tools.wmflabs.org/wmcounter/">wmcounter</a>: Wikimedia projects edits counter</li>' + 
