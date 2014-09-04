@@ -21,6 +21,10 @@ var layerOSM;
 var layerMonuments;
 var withimageicon;
 var withoutimageicon;
+var fmis_withimageicon;
+var fmis_withoutimageicon;
+var bbr_withimageicon;
+var bbr_withoutimageicon;
 
 $(document).ready(init);
 
@@ -37,6 +41,34 @@ function init() {
 
     withoutimageicon=L.icon({
     iconUrl: 'icons/withoutimageicon.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 31],
+    popupAnchor: [0, -16]
+    });
+    
+    bbr_withimageicon=L.icon({
+    iconUrl: 'icons/bbr_withimageicon.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 31],
+    popupAnchor: [0, -16]
+    });
+
+    bbr_withoutimageicon=L.icon({
+    iconUrl: 'icons/bbr_withoutimageicon.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 31],
+    popupAnchor: [0, -16]
+    });
+    
+    fmis_withimageicon=L.icon({
+    iconUrl: 'icons/fmis_withimageicon.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 31],
+    popupAnchor: [0, -16]
+    });
+
+    fmis_withoutimageicon=L.icon({
+    iconUrl: 'icons/fmis_withoutimageicon.png',
     iconSize: [32, 32],
     iconAnchor: [16, 31],
     popupAnchor: [0, -16]
@@ -133,9 +165,25 @@ function setMarker(feature,latlng) {
     var icon;
     if (feature.properties.image != 'Monument_unknown.png')
     {
-        icon = withimageicon;
+        if (feature.properties.country == 'se-fornmin')
+        {
+            icon = fmis_withimageicon;
+        }else if (feature.properties.country == 'se-bbr')
+        {
+            icon = bbr_withimageicon;
+        }else{
+            icon = withimageicon;
+        }
     }else{
-        icon = withoutimageicon;
+        if (feature.properties.country == 'se-fornmin')
+        {
+            icon = fmis_withoutimageicon;
+        }else if (feature.properties.country == 'se-bbr')
+        {
+            icon = bbr_withoutimageicon;
+        }else{
+            icon = withoutimageicon;
+        }
     }
     var monument; 
     monument=L.marker(latlng, {icon: icon});
