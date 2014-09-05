@@ -32,7 +32,7 @@ $(document).ready(init);
 
 function init() {
     var osmUrl='//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';    
-    var osmAttrib='Map data &copy; <a href="//openstreetmap.org" target="_blank">OpenStreetMap</a> contributors | <a href="https://commons.wikimedia.org/wiki/Commons:Monuments_database" target="_blank">Monuments database</a> by Wikipedia editors | <a href="https://github.com/emijrp/wlm-maps" target="_blank">Source code</a> by <a href="https://en.wikipedia.org/wiki/User:Emijrp">emijrp</a> in GitHub';
+    var osmAttrib='Map data &copy; <a href="//openstreetmap.org" target="_blank">OpenStreetMap</a> contributors | <a href="https://commons.wikimedia.org/wiki/Commons:Monuments_database" target="_blank">Monuments database</a> by Wikipedia editors | <a href="https://github.com/lokal-profil/wlm-maps/tree/sweden" target="_blank">Source code</a> by <a href="https://en.wikipedia.org/wiki/User:Emijrp">emijrp</a> in GitHub';
     
     withimageicon = L.icon({
         iconUrl: 'icons/withimageicon.png',
@@ -115,7 +115,7 @@ function init() {
     };
 
     var overlays = {
-        "Monuments": layerMonuments
+        "Monument": layerMonuments
     };
 
     L.control.layers(baseLayers, overlays).addTo(map);
