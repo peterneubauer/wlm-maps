@@ -100,7 +100,7 @@ function init() {
         pointToLayer: setMarker,
         }
     );
-    var start = new L.LatLng(62.5, 17.0);    
+    var start = new L.LatLng(63.5, 16.9);
     
     // create the map
     map = new L.Map('mapdiv', {
@@ -133,23 +133,18 @@ function init() {
     /*setTimeout(function () {
         sidebar.show();
     }, 500);*/
-    sidebar.setContent('<h1>Wiki Loves Monuments</h1>' + 
-        '<p><b>Welcome!</b> This is a map for the <a href="https://commons.wikimedia.org/wiki/Commons:Wiki_Loves_Monuments_2014">Wiki Loves Monument 2014</a> (<a href="http://www.wikilovesmonuments.org">blog</a>) photographic contest. Search monuments near to you, take photos and upload them!</p>' + 
-        '<h3>Legend</h3>' + 
-        '<table border=0 width=300px>' + 
-        '<tr><td><img src="icons/withimageicon.png" /></td><td>Monument with image</td>' + 
-        '<td><img src="icons/withoutimageicon.png" /></td><td>Monument without image</td></tr>' + 
-        '</table>' + 
-        '<h3>Statistics</h3>' + 
-        '<p>There are <a href="//tools.wmflabs.org/wlm-stats">statistics</a> to compare with previous editions.</p>' + 
-        '<iframe src="//tools.wmflabs.org/wlm-stats/stats-2014-mini.php" width=330px height=170px frameborder=0 scrolling=no style="margin-bottom: -20px;">Browser not compatible.</iframe>' +
-        '<h3>See also</h3>' + 
-        '<ul style="margin-left: -20px;">' + 
-        '<li><a href="http://tools.wmflabs.org/wmcounter/">wmcounter</a>: Wikimedia projects edits counter</li>' + 
-        '<li><a href="http://tools.wmflabs.org/commons-coverage/">Commons-coverage</a>: 1 image/km<sup>2</sup>, we can do it!</li>' + 
-        '<li><a href="https://en.wikipedia.org/wiki/Wikipedia:There_is_a_deadline">There is a deadline</a>: an essay on the importance of preserving knowledge</li>' + 
-        '<li><a href="https://en.wikipedia.org/wiki/User:Emijrp/All_human_knowledge">User:Emijrp/All human knowledge</a> - estimating the number of articles needed to cover all knowledge</li>' + 
-        '</ul>' + 
+    sidebar.setContent('<h1>Wiki Loves Monuments</h1>' +
+        '<p><b>Välkommen!</b> Detta är en karta för den fotografiska tävlingen <a href="https://commons.wikimedia.org/wiki/Commons:Wiki_Loves_Monuments_2014">Wiki Loves Monument 2014</a> (<a href="http://www.wikilovesmonuments.se">blogg</a>). Hitta kulturminnen i din närhet, ta fotografier och ladda upp dem!</p>' +
+        '<h3>Kartnyckel</h3>' +
+        '<table border=0 width=300px>' +
+        '<tr><td><img src="icons/withimageicon.png" /></td><td>Kulturminne med bild</td>' +
+        '<td><img src="icons/withoutimageicon.png" /></td><td>Kulturminne utan bild</td></tr>' +
+        '</table>' +
+        '<h3>Se även</h3>' +
+        '<ul style="margin-left: -20px;">' +
+        '<li><a href="//tools.wmflabs.org/wlm-maps/">wlm-maps</a>: Originalkartan med alla objekt som ingår internationellt</li>' +
+        '<li><a href="//tools.wmflabs.org/wlm-stats">wlm-stats</a>: Statistik för årets tävling.</li>' +
+        '</ul>' +
         ''
         );
     
