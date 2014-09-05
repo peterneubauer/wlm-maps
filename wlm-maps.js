@@ -25,6 +25,8 @@ var fmis_withimageicon;
 var fmis_withoutimageicon;
 var bbr_withimageicon;
 var bbr_withoutimageicon;
+var arbetsl_withimageicon;
+var arbetsl_withoutimageicon;
 
 $(document).ready(init);
 
@@ -47,28 +49,42 @@ function init() {
     });
     
     bbr_withimageicon=L.icon({
-    iconUrl: 'icons/bbr_withimageicon.png',
+    iconUrl: 'icons/BBRwithimageicon.png',
     iconSize: [32, 32],
     iconAnchor: [16, 31],
     popupAnchor: [0, -16]
     });
 
     bbr_withoutimageicon=L.icon({
-    iconUrl: 'icons/bbr_withoutimageicon.png',
+    iconUrl: 'icons/BBRwithoutimageicon.png',
     iconSize: [32, 32],
     iconAnchor: [16, 31],
     popupAnchor: [0, -16]
     });
     
     fmis_withimageicon=L.icon({
-    iconUrl: 'icons/fmis_withimageicon.png',
+    iconUrl: 'icons/FMISwithimageicon.png',
     iconSize: [32, 32],
     iconAnchor: [16, 31],
     popupAnchor: [0, -16]
     });
 
     fmis_withoutimageicon=L.icon({
-    iconUrl: 'icons/fmis_withoutimageicon.png',
+    iconUrl: 'icons/FMISwithoutimageicon.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 31],
+    popupAnchor: [0, -16]
+    });
+    
+    arbetsl_withimageicon=L.icon({
+    iconUrl: 'icons/Museumwithimageicon.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 31],
+    popupAnchor: [0, -16]
+    });
+
+    arbetsl_withoutimageicon=L.icon({
+    iconUrl: 'icons/Museumwithoutimageicon.png',
     iconSize: [32, 32],
     iconAnchor: [16, 31],
     popupAnchor: [0, -16]
@@ -84,12 +100,12 @@ function init() {
         pointToLayer: setMarker,
         }
     );
-    var start = new L.LatLng(0, 0);    
+    var start = new L.LatLng(62.5, 17.0);    
     
     // create the map
     map = new L.Map('mapdiv', {
         center: start,
-        zoom: 2,
+        zoom: 5,
         layers: [layerOSM,layerMonuments]
     });
     L.control.scale().addTo(map);
@@ -171,6 +187,9 @@ function setMarker(feature,latlng) {
         }else if (feature.properties.country == 'se-bbr')
         {
             icon = bbr_withimageicon;
+        }else if (feature.properties.country == 'se-arbetsl')
+        {
+            icon = bbr_withimageicon;
         }else{
             icon = withimageicon;
         }
@@ -179,6 +198,9 @@ function setMarker(feature,latlng) {
         {
             icon = fmis_withoutimageicon;
         }else if (feature.properties.country == 'se-bbr')
+        {
+            icon = bbr_withoutimageicon;
+        }else if (feature.properties.country == 'se-arbetsl')
         {
             icon = bbr_withoutimageicon;
         }else{
