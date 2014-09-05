@@ -202,7 +202,7 @@ function setMarker(feature,latlng) {
             icon = bbr_withimageicon;
         }else if (feature.properties.country == 'se-arbetsl')
         {
-            icon = bbr_withimageicon;
+            icon = arbetsl_withimageicon;
         }else{
             icon = withimageicon;
         }
@@ -215,7 +215,7 @@ function setMarker(feature,latlng) {
             icon = bbr_withoutimageicon;
         }else if (feature.properties.country == 'se-arbetsl')
         {
-            icon = bbr_withoutimageicon;
+            icon = arbetsl_withoutimageicon;
         }else{
             icon = withoutimageicon;
         }
