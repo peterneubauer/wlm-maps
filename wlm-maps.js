@@ -166,18 +166,21 @@ function setMarker(feature,latlng) {
         popuptext = popuptext + '<tr><td colspan=2><strong>'+feature.properties.name+'</strong></td></tr>';
     }
     var thumb_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/' + feature.properties.md5.substring(0,1) + '/' + feature.properties.md5.substring(0,2) + '/' + feature.properties.image + '/150px-' + feature.properties.image;
-    popuptext = popuptext + '<tr><td valign=top><b>ID:</b> '+feature.properties.id+'<br/><b>Typ:</b> ';
     if (feature.properties.country == 'se-fornmin')
     {
-        popuptext = popuptext + 'Fornlämning';
+        popuptext = popuptext + '<tr><td valign=top><b>ID:</b> <a href="http://kulturarvsdata.se/raa/fmi/html/'+feature.properties.id+'" target="_blank">'+feature.properties.id+'</a><br/>';
+        popuptext = popuptext + '<b>Typ:</b> Fornlämning';
     }else if (feature.properties.country == 'se-bbr')
     {
-        popuptext = popuptext + 'Byggnadsminne';
+        popuptext = popuptext + '<tr><td valign=top><b>ID:</b> <a href="http://www.bebyggelseregistret.raa.se/bbr2/anlaggning/visaHistorik.raa?page=historik&visaHistorik=true&anlaggningId='+feature.properties.id+'" target="_blank">'+feature.properties.id+'</a><br/>';
+        popuptext = popuptext + '<b>Typ:</b> Byggnadsminne';
     }else if (feature.properties.country == 'se-arbetsl')
     {
-        popuptext = popuptext + 'Arbetslivsmuseum';
+        popuptext = popuptext + '<tr><td valign=top><b>ID:</b> '+feature.properties.id+'<br/>';
+        popuptext = popuptext + '<b>Typ:</b> Arbetslivsmuseum';
     }else{
-        popuptext = popuptext + feature.properties.country.substring(3, 10);
+        popuptext = popuptext + '<tr><td valign=top><b>ID:</b> '+feature.properties.id+'<br/>';
+        popuptext = popuptext + '<b>Typ:</b> '+feature.properties.country.substring(3, 10);
     }
     popuptext = popuptext +'</td><td><a href="https://commons.wikimedia.org/wiki/File:'+feature.properties.image+'" target="_blank"><img src="'+thumb_url+'" /></a></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="https://commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-'+feature.properties.country+'&id='+feature.properties.id+'" target="_blank"><b>Ladda upp din bild!</b></a></td></tr>';
