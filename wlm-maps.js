@@ -140,7 +140,7 @@ function init() {
         '<tr><td><img src="icons/withimageicon.png" /></td><td>Kulturminne med bild</td></tr>' +
         '<tr><td><img src="icons/withoutimageicon.png" /></td><td>Kulturminne utan bild</td></tr>' +
         '<tr><td><img src="icons/FMISwithoutimageicon.png" /></td><td>Fornlämning</td></tr>' +
-        '<tr><td><img src="icons/BBRwithoutimageicon.png" /></td><td>Bygnadsminne</td></tr>' +
+        '<tr><td><img src="icons/BBRwithoutimageicon.png" /></td><td>Byggnadsminne</td></tr>' +
         '<tr><td><img src="icons/Museumwithoutimageicon.png" /></td><td>Arbetslivsmuseum</td></tr>' +
         '</table>' +
         '<h3>Se även</h3>' +
