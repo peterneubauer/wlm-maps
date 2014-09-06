@@ -119,8 +119,8 @@ function init() {
     };
 
     L.control.layers(baseLayers, overlays).addTo(map);
-    
-    var osmGeocoder = new L.Control.OSMGeocoder();
+    var osmOptions = {text: 'Hitta'};
+    var osmGeocoder = new L.Control.OSMGeocoder(osmOptions);
     map.addControl(osmGeocoder);
     var hash = new L.Hash(map);
     
