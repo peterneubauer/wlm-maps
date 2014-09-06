@@ -137,8 +137,11 @@ function init() {
         '<p><b>Välkommen!</b> Detta är en karta för den fotografiska tävlingen <a href="https://commons.wikimedia.org/wiki/Commons:Wiki_Loves_Monuments_2014">Wiki Loves Monument 2014</a> (<a href="http://www.wikilovesmonuments.se">blogg</a>). Hitta kulturminnen i din närhet, ta fotografier och ladda upp dem!</p>' +
         '<h3>Kartnyckel</h3>' +
         '<table border=0 width=300px>' +
-        '<tr><td><img src="icons/withimageicon.png" /></td><td>Kulturminne med bild</td>' +
-        '<td><img src="icons/withoutimageicon.png" /></td><td>Kulturminne utan bild</td></tr>' +
+        '<tr><td><img src="icons/withimageicon.png" /></td><td>Kulturminne med bild</td></tr>' +
+        '<tr><td><img src="icons/withoutimageicon.png" /></td><td>Kulturminne utan bild</td></tr>' +
+        '<tr><td><img src="icons/FMISwithoutimageicon.png" /></td><td>Fornlämning</td></tr>' +
+        '<tr><td><img src="icons/BBRwithoutimageicon.png" /></td><td>Bygnadsminne</td></tr>' +
+        '<tr><td><img src="icons/Museumwithoutimageicon.png" /></td><td>Arbetslivsmuseum</td></tr>' +
         '</table>' +
         '<h3>Se även</h3>' +
         '<ul style="margin-left: -20px;">' +
