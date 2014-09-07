@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+ <style  type="text/css">
+  html, body { margin: 0; padding: 0; height: 100%; }
+  img {
+    height: 100px;
+    float: left;
+  }
+  iframe {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    border: none;
+    box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+  }
+  </style>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<div id="images"></div>
+<script>
+    $(function() {
+        var url = "https://freegeoip.net/json/?callback=?";
+        var iframeStart = '<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="//tools.wmflabs.org/lp-tools/wlm-maps/#';
+        var iframeEnd = '"></iframe>';
+        $.ajax({
+             url:url,
+             dataType: 'json', // Notice! JSONP <-- P (lowercase)
+             success:function(json){
+                 // do stuff with json (in this case an array)
+                 geoinfo =(json.ip, json.country_code, json.latitude, json.longitude, 'Hej 1');
+                 if (json.country_code == 'SE' && json.region_code != ''){
+                    $( "div.geoinfo" ).replaceWith(iframeStart+"11/"+json.latitude+"/"+json.longitude+iframeEnd);
+                 }else{
+                    $( "div.geoinfo" ).replaceWith(iframeStart+"5/63.5/16.9"+iframeEnd);
+                }
+                //alert("Success: "+json.country_code+", "+json.latitude+", "+json.longitude);
+             },
+             error:function(){
+                 $( "div.geoinfo" ).replaceWith(iframeStart+"62.5,17.0&amp;z=5"+iframeEnd);
+                 //alert("Backup");
+             },
+             timeout: 3000 //timeout after 3 seconds
+        });
+    })
+</script>
+    </head>
+<body style="height:100%;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;>
+<div style="height:100%;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0; position: relative;">
+  <div class='geoinfo'>Loading...</div>
+</div>
+</body>
+</html>
