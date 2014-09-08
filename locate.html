@@ -8,20 +8,13 @@
     height: 100px;
     float: left;
   }
-  iframe {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    border: none;
-    box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
-  }
   </style>
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <div id="images"></div>
 <script>
     $(function() {
         var url = "https://freegeoip.net/json/?callback=?";
-        var iframeStart = '<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="./#';
-        var iframeEnd = '"></iframe>';
+        var targeturl = './#';
         $.ajax({
              url:url,
              dataType: 'json', // Notice! JSONP <-- P (lowercase)
@@ -29,24 +22,23 @@
                  // do stuff with json (in this case an array)
                  geoinfo =(json.ip, json.country_code, json.latitude, json.longitude, 'Hej 1');
                  if (json.country_code == 'SE' && json.region_code != ''){
-                    $( "div.geoinfo" ).replaceWith(iframeStart+"11/"+json.latitude+"/"+json.longitude+iframeEnd);
-                 }else{
-                    $( "div.geoinfo" ).replaceWith(iframeStart+"5/63.5/16.9"+iframeEnd);
+                    window.location = targeturl+"11/"+json.latitude+"/"+json.longitude;
+                }else{
+                    window.location = targeturl+"5/63.5/16.9";
                 }
                 //alert("Success: "+json.country_code+", "+json.latitude+", "+json.longitude);
              },
              error:function(){
-                 $( "div.geoinfo" ).replaceWith(iframeStart+"62.5,17.0&amp;z=5"+iframeEnd);
-                 //alert("Backup");
+                 window.location = targeturl+"5/63.5/16.9";
+                 //alert("Error");
              },
              timeout: 3000 //timeout after 3 seconds
         });
     })
 </script>
-    </head>
-<body style="height:100%;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;>
-<div style="height:100%;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0; position: relative;">
-  <div class='geoinfo'>Loading...</div>
-</div>
+</head>
+<body style="height:100%;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;">
+<div class='geoinfo'>Loading... if you are not redirected automatically within a few seconds please click 
+<a href="./">here</a>.</div>
 </body>
 </html>
