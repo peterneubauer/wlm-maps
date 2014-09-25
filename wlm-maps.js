@@ -156,7 +156,7 @@ function setMarker(feature,latlng) {
     var monument; 
     monument=L.marker(latlng, {icon: icon});
     var content = $(popuptext);
-    content.appendChild(link)
+    content.append(link)
     monument.bindPopup(content, {minWidth: 300});
     return monument;
 }
