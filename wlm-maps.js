@@ -138,6 +138,7 @@ function setMarker(feature,latlng) {
         });
     })[0];
 
+    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a ' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><iframe height="300px" src="https://www.mapillary.com/jsapi?showMap=false&showImage=true&image=M0DruvYsjEf-Jj3LRXR1yA"/></td></tr>';
     if (feature.properties.commonscat)
@@ -154,7 +155,7 @@ function setMarker(feature,latlng) {
     }
     var monument; 
     monument=L.marker(latlng, {icon: icon});
-    monument.bindPopup(popuptext, {minWidth: 300});
+    monument.bindPopup(link, {minWidth: 300});
     return monument;
 }
 
