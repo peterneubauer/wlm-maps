@@ -128,7 +128,7 @@ function setMarker(feature,latlng) {
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-'+feature.properties.country+'&id='+feature.properties.id+'" target="_blank"><b>Upload your photo</b></a></td></tr>';
     var link = $('<a href="#" class="">TestLink</a>').click(function() {
         $.ajax({
-            url: 'http://api.mapillary.com/v1/im/close?lat=38.89356&lon=-77.033634&distance=100&limit=3',
+            url: 'http://api.mapillary.com/v1/im/close?lat='+feature.geometry.coordinates[1]+'&lon='+feature.geometry.coordinates[0]+'&distance=100&limit=3',
             dataType: 'json',
             success: function(data) {
                 console.log('data',data);
