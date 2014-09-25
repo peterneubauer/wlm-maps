@@ -116,7 +116,7 @@ function whenMapMoves(e) {
 function setMarker(feature,latlng) {
     var popuptext;
     popuptext = '<table border=0 width=300px>';
-    console.log('feature', feature);
+//    console.log('feature', feature);
     if (feature.properties.monument_article)
     {
         popuptext = popuptext + '<tr><td colspan=2><strong><a href="//'+feature.properties.lang+'.wikipedia.org/wiki/'+feature.properties.monument_article+'" target="_blank">'+feature.properties.name+'</a></strong></td></tr>';
