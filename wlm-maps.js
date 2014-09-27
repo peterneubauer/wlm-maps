@@ -141,12 +141,13 @@ function setMarker(feature,latlng) {
 
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a ' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><iframe height="300px" src="https://www.mapillary.com/jsapi?showMap=false&showImage=true&image=M0DruvYsjEf-Jj3LRXR1yA"/></td></tr>';
+//    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><iframe height="300px" src="https://www.mapillary.com/jsapi?showMap=false&showImage=true&image=M0DruvYsjEf-Jj3LRXR1yA"/></td></tr>';
     if (feature.properties.commonscat)
     {
         popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;">(<a href="//commons.wikimedia.org/wiki/Category:'+feature.properties.commonscat+'" target="_blank">More images in Commons</a>)</td></tr>';
     }
     popuptext = popuptext + '</table>';
+
     var icon;
     if (feature.properties.image != 'Monument_unknown.png')
     {
@@ -157,8 +158,7 @@ function setMarker(feature,latlng) {
     var monument; 
     monument=L.marker(latlng, {icon: icon});
     var content = $(popuptext);
-//    content.append(content)
-    monument.bindPopup(link, {minWidth: 300});
+    monument.bindPopup(content, {minWidth: 300});
     return monument;
 }
 
