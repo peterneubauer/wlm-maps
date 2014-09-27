@@ -116,7 +116,6 @@ function whenMapMoves(e) {
 function setMarker(feature,latlng) {
     var popuptext;
     popuptext = '<table border=0 width=300px>';
-//    console.log('feature', feature);
     if (feature.properties.monument_article)
     {
         popuptext = popuptext + '<tr><td colspan=2><strong><a href="//'+feature.properties.lang+'.wikipedia.org/wiki/'+feature.properties.monument_article+'" target="_blank">'+feature.properties.name+'</a></strong></td></tr>';
@@ -139,7 +138,7 @@ function setMarker(feature,latlng) {
     })[0];
 
 
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a ' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
+//    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a ' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
 //    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><iframe height="300px" src="https://www.mapillary.com/jsapi?showMap=false&showImage=true&image=M0DruvYsjEf-Jj3LRXR1yA"/></td></tr>';
     if (feature.properties.commonscat)
@@ -158,6 +157,7 @@ function setMarker(feature,latlng) {
     var monument; 
     monument=L.marker(latlng, {icon: icon});
     var content = $(popuptext);
+    console.log('popup', content);
     monument.bindPopup(content, {minWidth: 300});
     return monument;
 }
