@@ -126,10 +126,10 @@ function setMarker(feature,latlng) {
     popuptext = popuptext + '<tr><td valign=top><b>ID:</b> '+feature.properties.id+'<br/><b>Country:</b> '+feature.properties.country+'</td><td><a href="//commons.wikimedia.org/wiki/File:'+feature.properties.image+'" target="_blank"><img src="'+thumb_url+'" /></a></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-'+feature.properties.country+'&id='+feature.properties.id+'" target="_blank"><b>Upload your photo</b></a></td></tr>';
     var klass = 'test-'+feature.properties.id.replace(/\//g, "_")
-    var link = document.createElement('a');
-    link.innerHTML = 'Click here';
-    link.href = '#test';
-    link.className = klass
+    var link = $('<div>').html('Click here');
+//    link.innerHTML = '';
+//    link.href = '#test';
+//    link.className = klass
 
 
 //    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a ' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
@@ -153,7 +153,7 @@ function setMarker(feature,latlng) {
     monument=L.marker(latlng, {icon: icon});
     var content = $(popuptext);
     console.log('popup', link);
-    $('click', 'a.'+klass,  function() {
+    $('click', '.'+klass,  function() {
         var url = 'https://api.mapillary.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=3';
         console.log('url', url);
         $.ajax({
