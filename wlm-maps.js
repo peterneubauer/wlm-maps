@@ -149,7 +149,7 @@ function setMarker(feature,latlng) {
     monument=L.marker(latlng, {icon: icon});
     var content = $(popuptext);
     console.log('popup', link);
-    link.click(function() {
+    link.onClick = function() {
         var url = 'https://api.mapillary.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=3';
         console.log('url', url);
         $.ajax({
@@ -159,7 +159,7 @@ function setMarker(feature,latlng) {
                 console.log('data',data);
             }
         });
-    })[0];
+    };
     monument.bindPopup(link, {minWidth: 300});
     return monument;
 }
