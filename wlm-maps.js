@@ -125,18 +125,8 @@ function setMarker(feature,latlng) {
     var thumb_url = '//upload.wikimedia.org/wikipedia/commons/thumb/' + feature.properties.md5.substring(0,1) + '/' + feature.properties.md5.substring(0,2) + '/' + feature.properties.image + '/150px-' + feature.properties.image;
     popuptext = popuptext + '<tr><td valign=top><b>ID:</b> '+feature.properties.id+'<br/><b>Country:</b> '+feature.properties.country+'</td><td><a href="//commons.wikimedia.org/wiki/File:'+feature.properties.image+'" target="_blank"><img src="'+thumb_url+'" /></a></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-'+feature.properties.country+'&id='+feature.properties.id+'" target="_blank"><b>Upload your photo</b></a></td></tr>';
-    var link = $('<a href="#" class="">TestLink</a>').click(function() {
-        var url = 'https://api.mapillary.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=3';
-        console.log('url', url);
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            success: function(data) {
-                console.log('data',data);
-            }
-        });
-    })[0];
-
+    var klass = 'test-'+feature.properties.id
+    var link = '<a href="#" class="'+klass+'">TestLink</a>';
 
 //    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a ' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
@@ -146,6 +136,7 @@ function setMarker(feature,latlng) {
         popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;">(<a href="//commons.wikimedia.org/wiki/Category:'+feature.properties.commonscat+'" target="_blank">More images in Commons</a>)</td></tr>';
     }
     popuptext = popuptext + '</table>';
+    popuptext = popuptext + link;
 
     var icon;
     if (feature.properties.image != 'Monument_unknown.png')
@@ -158,7 +149,20 @@ function setMarker(feature,latlng) {
     monument=L.marker(latlng, {icon: icon});
     var content = $(popuptext);
     console.log('popup', content);
-    monument.bindPopup(content, {minWidth: 300});
+    monument.bindPopup(popuptext, {minWidth: 300});
+    var linkBind = $("." + klass);
+    console.log('linkbind', linkBind);
+    linkBind.click(function() {
+        var url = 'https://api.mapillary.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=3';
+        console.log('url', url);
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            success: function(data) {
+                console.log('data',data);
+            }
+        });
+    })[0];
     return monument;
 }
 
