@@ -136,7 +136,7 @@ function setMarker(feature,latlng) {
         popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;">(<a href="//commons.wikimedia.org/wiki/Category:'+feature.properties.commonscat+'" target="_blank">More images in Commons</a>)</td></tr>';
     }
     popuptext = popuptext + '</table>';
-    popuptext = popuptext + link;
+//    popuptext = popuptext + link;
 
     var icon;
     if (feature.properties.image != 'Monument_unknown.png')
@@ -149,7 +149,7 @@ function setMarker(feature,latlng) {
     monument=L.marker(latlng, {icon: icon});
     var content = $(popuptext);
     console.log('popup', content);
-    monument.bindPopup(popuptext, {minWidth: 300});
+    monument.bindPopup(content, {minWidth: 300});
     var linkBind = $("." + klass);
     console.log('linkbind', linkBind);
     linkBind.click(function() {
