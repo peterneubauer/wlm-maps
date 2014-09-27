@@ -129,6 +129,8 @@ function setMarker(feature,latlng) {
     var link = document.createElement('a');
     link.innerHTML = 'Click here';
     link.href = '#test';
+    link.className = klass
+
 
 //    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a ' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
@@ -151,7 +153,7 @@ function setMarker(feature,latlng) {
     monument=L.marker(latlng, {icon: icon});
     var content = $(popuptext);
     console.log('popup', link);
-    link.onClick = function() {
+    $('click', 'a.'+klass,  function() {
         var url = 'https://api.mapillary.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=3';
         console.log('url', url);
         $.ajax({
@@ -161,7 +163,7 @@ function setMarker(feature,latlng) {
                 console.log('data',data);
             }
         });
-    };
+    });
     monument.bindPopup(link, {minWidth: 300});
     return monument;
 }
