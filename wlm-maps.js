@@ -150,7 +150,7 @@ function setMarker(feature,latlng) {
         event.stopPropagation();
         var url = 'https://api.mapillary.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=3';
         console.log('mapillary request', url);
-        $('#'+klass).html('<div class="loading">Loading ...</div>');
+        $('#'+klass).html('<div class="loading overlay">Loading ...</div>');
         $.ajax({
             url: url,
             dataType: 'json',
