@@ -147,7 +147,7 @@ function setMarker(feature,latlng) {
     }
     var monument; 
     monument=L.marker(latlng, {icon: icon});
-    monument.bindPopup(link, {minWidth: 300});
+    monument.bindPopup(popuptext, {minWidth: 300});
     $('#mapdiv').on('click', '.'+klass,  function(event) {
         event.stopPropagation();
         var url = 'https://api.mapillary.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=3';
