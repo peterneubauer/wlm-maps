@@ -159,7 +159,7 @@ function setMarker(feature,latlng) {
                 if(data.length== 0) {
                     $('#'+klass).html('no mapillary images here.')
                 } else {
-                    $('#'+klass).html('<iframe height="300px" src="https://www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
+                    $('#'+klass).html('<iframe height="300px" src="http://www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
 
                 }
             }
