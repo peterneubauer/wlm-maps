@@ -165,8 +165,9 @@ function setMarker(feature,latlng) {
         });
     });
     monument.bindPopup(link, {minWidth: 300});
-    $('#mapdiv').on('click','.'+klass,function(data){
-        console.log('clicked', klass, data);
+    $('#mapdiv').on('click','.'+klass,function(event){
+        event.stopPropagation();
+        console.log('clicked', klass, event);
     });
     return monument;
 }
