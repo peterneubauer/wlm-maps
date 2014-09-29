@@ -127,9 +127,7 @@ function setMarker(feature,latlng) {
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-'+feature.properties.country+'&id='+feature.properties.id+'" target="_blank"><b>Upload your photo</b></a></td></tr>';
     var klass = 'test-'+feature.properties.id.replace(/\//g, "_")
 
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a ' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="'+klass+'">click</button></td></tr>';
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;">or, <a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Submit this Mapillary view!</b></a></td></tr>';
+    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="'+klass+'">Check Mapillary</button></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="'+klass+'"></div></td></tr>';
     if (feature.properties.commonscat)
     {
@@ -157,11 +155,11 @@ function setMarker(feature,latlng) {
             url: url,
             dataType: 'json',
             success: function(data) {
-                console.log('data',data);
+                console.log('data',data[0].key);
                 if(data.length== 0) {
                     $('#'+klass).html('no mapillary images here.')
                 } else {
-                    $('#'+klass).html('<iframe height="300px" src="https://www.mapillary.com/jsapi?showMap=false&showImage=true&image="'+data[0].key+'/>')
+                    $('#'+klass).html('<iframe height="300px" src="https://www.mapillary.com/jsapi?showMap=false&showImage=true&image="'+data[0].key+'"/>')
 
                 }
             }
