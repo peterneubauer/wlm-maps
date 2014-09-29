@@ -149,15 +149,15 @@ function setMarker(feature,latlng) {
     $('#mapdiv').on('click', '.'+klass,  function(event) {
         event.stopPropagation();
         var url = 'https://api.mapillary.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=3';
-        console.log('url', url);
+        console.log('mapillary request', url);
         $('#'+klass).html('<div class="loading">Loading ...</div>');
         $.ajax({
             url: url,
             dataType: 'json',
             success: function(data) {
-                console.log('data',data[0].key);
+                console.log('mapillary data',data[0]);
                 if(data.length== 0) {
-                    $('#'+klass).html('no mapillary images here.')
+                    $('#'+klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>')
                 } else {
                     $('#'+klass).html('<iframe height="300px" src="https://www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
 
