@@ -40,3 +40,8 @@ body{
     background-color:rgba(100,100,255,0.8);
 }
 
+.loading {
+    background-color: rgba(255,100,100,0.8);
+}
+
+
