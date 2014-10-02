@@ -161,11 +161,11 @@ function setMarker(feature,latlng) {
                 if(data.length== 0) {
                     $('#'+klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>')
                 } else {
-                    $('#'+klass).html('<iframe id="mapillary_frame" height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
+                    $('#'+klass).html('<iframe id="mapillary_frame" height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/><div id="mapillary_button"></div>')
                     var $iframe = $('#mapillary_frame');
                     console.log('iframe', $iframe);
                     $iframe[0].contentWindow.addEventListener('message', function(event) {
-                        console.log('message received', event);
+                        $('#mapillary_button').html('Submit image <b>'+event.data.data.key+'</b>')
                     });
 
                 }
