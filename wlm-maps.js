@@ -26,9 +26,7 @@ $(document).ready(init);
 
 function init() {
 
-    window.addEventListener('message', function(event) {
-       console.log('message received', event);
-    });
+
     var osmUrl='//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';    
     var osmAttrib='Map data &copy; <a href="//openstreetmap.org" target="_blank">OpenStreetMap</a> contributors | <a href="//commons.wikimedia.org/wiki/Commons:Monuments_database" target="_blank">Monuments database</a> by Wikipedia editors | <a href="//github.com/emijrp/wlm-maps" target="_blank">Source code</a> by <a href="//en.wikipedia.org/wiki/User:Emijrp" target="_blank">emijrp</a> in GitHub';
     
@@ -164,6 +162,11 @@ function setMarker(feature,latlng) {
                     $('#'+klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>')
                 } else {
                     $('#'+klass).html('<iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
+                    var $iframe = $('iframe');
+                    console.log('iframe', $iframe);
+                    $iframe.addEventListener('message', function(event) {
+                        console.log('message received', event);
+                    });
 
                 }
             }
