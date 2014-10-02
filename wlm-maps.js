@@ -164,7 +164,7 @@ function setMarker(feature,latlng) {
                     $('#'+klass).html('<iframe id="mapillary_frame" height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
                     var $iframe = $('#mapillary_frame');
                     console.log('iframe', $iframe);
-                    $iframe.contentWindow.addEventListener('message', function(event) {
+                    $iframe[0].contentWindow.addEventListener('message', function(event) {
                         console.log('message received', event);
                     });
 
