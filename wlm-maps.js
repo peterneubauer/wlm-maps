@@ -117,7 +117,6 @@ function whenMapMoves(e) {
 
 function setMarker(feature,latlng) {
     var popuptext;
-    console.log(feature);
     popuptext = '<table border=0 width=300px>';
     if (feature.properties.monument_article)
     {
@@ -130,7 +129,6 @@ function setMarker(feature,latlng) {
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-'+feature.properties.country+'&id='+feature.properties.id+'" target="_blank"><b>Upload your photo</b></a></td></tr>';
     var klass = 'mapillary_'+feature.properties.id
         .replace(/[<> \/-]/g,'_');
-    console.log('klass', klass);
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="'+klass+'">Check Mapillary</button></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="'+klass+'"></div></td></tr>';
     if (feature.properties.commonscat)
