@@ -117,6 +117,7 @@ function whenMapMoves(e) {
 
 function setMarker(feature,latlng) {
     var popuptext;
+    console.log(feature);
     popuptext = '<table border=0 width=300px>';
     if (feature.properties.monument_article)
     {
@@ -127,7 +128,7 @@ function setMarker(feature,latlng) {
     var thumb_url = '//upload.wikimedia.org/wikipedia/commons/thumb/' + feature.properties.md5.substring(0,1) + '/' + feature.properties.md5.substring(0,2) + '/' + feature.properties.image + '/150px-' + feature.properties.image;
     popuptext = popuptext + '<tr><td valign=top><b>ID:</b> '+feature.properties.id+'<br/><b>Country:</b> '+feature.properties.country+'</td><td><a href="//commons.wikimedia.org/wiki/File:'+feature.properties.image+'" target="_blank"><img src="'+thumb_url+'" /></a></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-'+feature.properties.country+'&id='+feature.properties.id+'" target="_blank"><b>Upload your photo</b></a></td></tr>';
-    var klass = 'mapillary_'+feature.properties.id;
+    var klass = 'mapillary_'+feature.properties.id.replace(/\//g,'_').replace(/ /g,'_').replace(/-/g,'_');
     console.log('klass', klass);
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="'+klass+'">Check Mapillary</button></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="'+klass+'"></div></td></tr>';
