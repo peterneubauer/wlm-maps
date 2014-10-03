@@ -165,6 +165,7 @@ function setMarker(feature,latlng) {
                     var $iframe = $('#mapillary_frame');
                     console.log('iframe', $iframe);
                     $iframe[0].contentWindow.addEventListener('message', function(event) {
+                        console.log('received message', event);
                         $('#mapillary_button').html('Submit image <b>'+event.data.data.key+'</b>')
                     });
 
