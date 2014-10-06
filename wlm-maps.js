@@ -151,7 +151,7 @@ function setMarker(feature,latlng) {
     monument.bindPopup(popuptext, {minWidth: 300});
     $('#mapdiv').on('click', '.'+klass,  function(event) {
         event.stopPropagation();
-        var url = 'https://mapillary-read-api.herokuapp.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=3';
+        var url = 'https://mapillary-read-api.herokuapp.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=1';
         console.log('mapillary request', url);
         $('#'+klass).html('<div class="loading overlay">Loading ...</div>');
         $.ajax({
