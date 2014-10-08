@@ -110,6 +110,7 @@ function init() {
     map.on('moveend', whenMapMoves);
     window.addEventListener('message', function(event) {
         console.log('received message', event);
+//        $('#'+mapillary_button).html("event.data.")
     }, false);
 
     askForMonuments();
