@@ -109,8 +109,11 @@ function init() {
     
     map.on('moveend', whenMapMoves);
     window.addEventListener('message', function(event) {
-        console.log('received message', event);
-        $('#mapillary_button').html("current picture ID: "+JSON.parse(event.data).data.key);
+//        console.log('received message', event);
+        var parsed = JSON.parse(event.data);
+        if(parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
+            $('#mapillary_button').html("current picture ID: "+parsed.data.key);
+        }
     }, false);
 
     askForMonuments();
