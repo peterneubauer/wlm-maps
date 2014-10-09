@@ -135,7 +135,7 @@ function setMarker(feature,latlng) {
     var klass = 'mapillary_'+feature.properties.id
         .replace(/[<> \/-]/g,'_')
         .replace(/\}/g, '_');
-    console.log(feature.properties.id, klass);
+//    console.log(feature.properties.id, klass);
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="'+klass+'">Check Mapillary</button></td></tr>';
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="'+klass+'"></div></td></tr>';
     if (feature.properties.commonscat)
@@ -159,17 +159,17 @@ function setMarker(feature,latlng) {
     $('#mapdiv').on('click', '.'+klass,  function(event) {
         event.stopPropagation();
         var url = 'https://mapillary-read-api.herokuapp.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=1';
-        console.log('mapillary request', url);
+//        console.log('mapillary request', url);
         $('#'+klass).html('<div class="loading overlay">Loading ...</div>');
         $.ajax({
             url: url,
             dataType: 'json',
             success: function(data) {
-                console.log('mapillary data',data[0]);
+//                console.log('mapillary data',data[0]);
                 if(data.length== 0) {
                     $('#'+klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>')
                 } else {
-                    $('#'+klass).html('<div id="mapillary_button" class="mapillary_button '+klass+'">hej</div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
+                    $('#'+klass).html('<div id="mapillary_button" class="mapillary_button '+klass+'"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
 
                 }
             }
