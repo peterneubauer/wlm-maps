@@ -138,7 +138,7 @@ function setMarker(feature,latlng) {
     var klass = 'mapillary_'+feature.properties.id
         .replace(/[<> \/-]/g,'_')
         .replace(/\)/g, '_')
-        .replace(/\)/g, '_')
+        .replace(/\(/g, '_')
         .replace(/\}/g, '_');
 //    console.log(feature.properties.id, klass);
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="'+klass+'">Check Mapillary</button></td></tr>';
