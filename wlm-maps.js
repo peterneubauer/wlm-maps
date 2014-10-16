@@ -137,6 +137,8 @@ function setMarker(feature,latlng) {
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-'+feature.properties.country+'&id='+feature.properties.id+'" target="_blank"><b>Upload your photo</b></a></td></tr>';
     var klass = 'mapillary_'+feature.properties.id
         .replace(/[<> \/-]/g,'_')
+        .replace(/\)/g, '_')
+        .replace(/\)/g, '_')
         .replace(/\}/g, '_');
 //    console.log(feature.properties.id, klass);
     popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="'+klass+'">Check Mapillary</button></td></tr>';
