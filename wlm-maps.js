@@ -192,7 +192,6 @@ function setMarker(feature,latlng) {
                 if(data.length== 0) {
                     $('#'+klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>')
                 } else {
-                    popuptext = popuptext + getMapillaryImageByKey(data[0].key)
                     $('#'+klass).html('<div id="mapillary_button" class="mapillary_button '+klass+'"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
                 }
             }
