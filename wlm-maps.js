@@ -147,27 +147,27 @@ function setMarker(feature, latlng) {
     var popuptext;
     popuptext = '<table border=0 width=300px>';
     if (feature.properties.monument_article) {
-        popuptext = popuptext + '<tr><td colspan=2><strong><a href="//' + feature.properties.lang + '.wikipedia.org/wiki/' + feature.properties.monument_article + '" target="_blank">' + feature.properties.name + '</a></strong></td></tr>';
+        popuptext += '<tr><td colspan=2><strong><a href="//' + feature.properties.lang + '.wikipedia.org/wiki/' + feature.properties.monument_article + '" target="_blank">' + feature.properties.name + '</a></strong></td></tr>';
     } else {
-        popuptext = popuptext + '<tr><td colspan=2><strong>' + feature.properties.name + '</strong></td></tr>';
+        popuptext += '<tr><td colspan=2><strong>' + feature.properties.name + '</strong></td></tr>';
     }
     var thumb_url = '//upload.wikimedia.org/wikipedia/commons/thumb/' + feature.properties.md5.substring(0, 1) + '/' + feature.properties.md5.substring(0, 2) + '/' + feature.properties.image + '/150px-' + feature.properties.image;
-    popuptext = popuptext + '<tr><td valign=top><b>ID:</b> ' + feature.properties.id + '<br/><b>Country:</b> ' + feature.properties.country + '</td><td><a href="//commons.wikimedia.org/wiki/File:' + feature.properties.image + '" target="_blank"><img src="' + thumb_url + '" /></a></td></tr>';
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Upload your photo</b></a></td></tr>';
+    popuptext += '<tr><td valign=top><b>ID:</b> ' + feature.properties.id + '<br/><b>Country:</b> ' + feature.properties.country + '</td><td><a href="//commons.wikimedia.org/wiki/File:' + feature.properties.image + '" target="_blank"><img src="' + thumb_url + '" /></a></td></tr>';
+    popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Upload your photo</b></a></td></tr>';
     var klass = 'mapillary_' + feature.properties.id
         .replace(/[<> \/-]/g, '_')
         .replace(/\)/g, '_')
         .replace(/\(/g, '_')
         .replace(/\}/g, '_');
 //    console.log(feature.properties.id, klass);
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="' + klass + '">Check Mapillary</button></td></tr>';
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="' + klass + '"></div></td></tr>';
+    popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="' + klass + '">Check Mapillary</button></td></tr>';
+    popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="' + klass + '"></div></td></tr>';
     if (feature.properties.commonscat) {
-        popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;">(<a href="//commons.wikimedia.org/wiki/Category:' + feature.properties.commonscat + '" target="_blank">More images in Commons</a>)</td></tr>';
+        popuptext += '<tr><td colspan=2 style="text-align: center;">(<a href="//commons.wikimedia.org/wiki/Category:' + feature.properties.commonscat + '" target="_blank">More images in Commons</a>)</td></tr>';
     }
-    popuptext = popuptext + '</table>';
+    popuptext += '</table>';
 
-//    popuptext = popuptext + link;
+//    popuptext += link;
 
     var icon;
     if (feature.properties.image != 'Monument_unknown.png') {
