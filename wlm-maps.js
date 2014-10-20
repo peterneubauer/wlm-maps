@@ -16,7 +16,7 @@
  * along with the Software, see
  * <http://creativecommons.org/publicdomain/zero/1.0/>
  */
- 
+
 var map;
 var layerOSM;
 var layerMonuments;
@@ -28,43 +28,42 @@ $(document).ready(init);
 function init() {
 
 
-    var osmUrl='//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';    
-    var osmAttrib='Map data &copy; <a href="//openstreetmap.org" target="_blank">OpenStreetMap</a> contributors | <a href="//commons.wikimedia.org/wiki/Commons:Monuments_database" target="_blank">Monuments database</a> by Wikipedia editors | <a href="//github.com/peterneubauer/wlm-maps" target="_blank">Source code</a> by <a href="//en.wikipedia.org/wiki/User:Emijrp" target="_blank">emijrp</a> and peterneubauer in GitHub';
-    
-    withimageicon=L.icon({
-    iconUrl: 'icons/withimageicon.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 31],
-    popupAnchor: [0, -16]
+    var osmUrl = '//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osmAttrib = 'Map data &copy; <a href="//openstreetmap.org" target="_blank">OpenStreetMap</a> contributors | <a href="//commons.wikimedia.org/wiki/Commons:Monuments_database" target="_blank">Monuments database</a> by Wikipedia editors | <a href="//github.com/peterneubauer/wlm-maps" target="_blank">Source code</a> by <a href="//en.wikipedia.org/wiki/User:Emijrp" target="_blank">emijrp</a> and peterneubauer in GitHub';
+
+    withimageicon = L.icon({
+        iconUrl: 'icons/withimageicon.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 31],
+        popupAnchor: [0, -16]
     });
 
-    withoutimageicon=L.icon({
-    iconUrl: 'icons/withoutimageicon.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 31],
-    popupAnchor: [0, -16]
+    withoutimageicon = L.icon({
+        iconUrl: 'icons/withoutimageicon.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 31],
+        popupAnchor: [0, -16]
     });
 
     layerOSM = new L.TileLayer(osmUrl, {
-        minZoom: 2, 
-        maxZoom: 19, 
+        minZoom: 2,
+        maxZoom: 19,
         attribution: osmAttrib
     });
-    
+
     layerMonuments = L.geoJson(null, {
-        pointToLayer: setMarker,
-        }
-    );
-    var start = new L.LatLng(0, 0);    
-    
+        pointToLayer: setMarker
+    });
+    var start = new L.LatLng(0, 0);
+
     // create the map
     map = new L.Map('mapdiv', {
         center: start,
         zoom: 2,
-        layers: [layerOSM,layerMonuments]
+        layers: [layerOSM, layerMonuments]
     });
     L.control.scale().addTo(map);
-    
+
     var baseLayers = {
         "OpenStreetMap": layerOSM
     };
@@ -74,46 +73,65 @@ function init() {
     };
 
     L.control.layers(baseLayers, overlays).addTo(map);
-    
+
     var osmGeocoder = new L.Control.OSMGeocoder();
     map.addControl(osmGeocoder);
     var hash = new L.Hash(map);
-    
+
     // sidebar
     sidebar = L.control.sidebar('sidebar', {
         position: 'left',
-        autoPan: false,
+        autoPan: false
     });
     map.addControl(sidebar);
     /*setTimeout(function () {
         sidebar.show();
     }, 500);*/
-    sidebar.setContent('<h1>Wiki Loves Monuments</h1>' + 
-        '<p><img src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f3/LUSITANA_WLM_2011_d.svg/70px-LUSITANA_WLM_2011_d.svg.png" align=right /><b>Welcome!</b> This is a map for the <a href="//commons.wikimedia.org/wiki/Commons:Wiki_Loves_Monuments_2014" target="_blank">Wiki Loves Monument 2014</a> (<a href="//www.wikilovesmonuments.org" target="_blank">blog</a>) photographic contest. Search monuments near to you, take photos and upload them!</p>' + 
-        '<h3>Legend</h3>' + 
-        '<table border=0 width=300px>' + 
-        '<tr><td><img src="icons/withimageicon.png" /></td><td>Monument with image</td>' + 
-        '<td><img src="icons/withoutimageicon.png" /></td><td>Monument without image</td></tr>' + 
-        '</table>' + 
-        '<h3>Statistics</h3>' + 
-        '<p>There are <a href="//tools.wmflabs.org/wlm-stats" target="_blank">statistics</a> to compare with previous editions.</p>' + 
+    sidebar.setContent('<h1>Wiki Loves Monuments</h1>' +
+        '<p><img src="//upload.wikimedia.org/wikipedia/commons/thumb/f/f3/LUSITANA_WLM_2011_d.svg/70px-LUSITANA_WLM_2011_d.svg.png" align=right /><b>Welcome!</b> This is a map for the <a href="//commons.wikimedia.org/wiki/Commons:Wiki_Loves_Monuments_2014" target="_blank">Wiki Loves Monument 2014</a> (<a href="//www.wikilovesmonuments.org" target="_blank">blog</a>) photographic contest. Search monuments near to you, take photos and upload them!</p>' +
+        '<h3>Legend</h3>' +
+        '<table border=0 width=300px>' +
+        '<tr><td><img src="icons/withimageicon.png" /></td><td>Monument with image</td>' +
+        '<td><img src="icons/withoutimageicon.png" /></td><td>Monument without image</td></tr>' +
+        '</table>' +
+        '<h3>Statistics</h3>' +
+        '<p>There are <a href="//tools.wmflabs.org/wlm-stats" target="_blank">statistics</a> to compare with previous editions.</p>' +
         '<iframe src="//tools.wmflabs.org/wlm-stats/stats-2014-mini.php" width=330px height=170px frameborder=0 scrolling=no style="margin-bottom: -20px;">Browser not compatible.</iframe>' +
-        '<h3>See also</h3>' + 
-        '<ul style="margin-left: -20px;">' + 
-        '<li><a href="//tools.wmflabs.org/wmcounter/" target="_blank">wmcounter</a>: Wikimedia projects edits counter</li>' + 
-        '<li><a href="//tools.wmflabs.org/commons-coverage/" target="_blank">Commons Coverage</a>: 1 image/km<sup>2</sup>, we can do it!</li>' + 
-        '<li><a href="//en.wikipedia.org/wiki/Wikipedia:There_is_a_deadline" target="_blank">There is a deadline</a>: an essay on the importance of preserving knowledge</li>' + 
-        '<li><a href="//en.wikipedia.org/wiki/User:Emijrp/All_human_knowledge" target="_blank">User:Emijrp/All human knowledge</a> - estimating the number of articles needed to cover all knowledge</li>' + 
-        '</ul>' + 
+        '<h3>See also</h3>' +
+        '<ul style="margin-left: -20px;">' +
+        '<li><a href="//tools.wmflabs.org/wmcounter/" target="_blank">wmcounter</a>: Wikimedia projects edits counter</li>' +
+        '<li><a href="//tools.wmflabs.org/commons-coverage/" target="_blank">Commons Coverage</a>: 1 image/km<sup>2</sup>, we can do it!</li>' +
+        '<li><a href="//en.wikipedia.org/wiki/Wikipedia:There_is_a_deadline" target="_blank">There is a deadline</a>: an essay on the importance of preserving knowledge</li>' +
+        '<li><a href="//en.wikipedia.org/wiki/User:Emijrp/All_human_knowledge" target="_blank">User:Emijrp/All human knowledge</a> - estimating the number of articles needed to cover all knowledge</li>' +
+        '</ul>' +
         ''
         );
-    
+
     map.on('moveend', whenMapMoves);
     window.addEventListener('message', function(event) {
 //        console.log('received message', event);
         var parsed = JSON.parse(event.data);
         if(parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
-            $('#mapillary_button').html("current picture ID: "+parsed.data.key);
+            $.ajax({
+                url: 'https://a.mapillary.com/v2/g/' + parsed.data.key,
+                dataType: 'json',
+                success: function(data) {
+                    console.log('mapillary data', data[0].nodes[0]);
+                    var isoDate = new Date(data[0].nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
+                    var uploadDescription = '{{subst:Mapillary'
+                        + '|location=' + data[0].nodes[0].location
+                        + '|key=' + data[0].nodes[0].key
+                        + '|date=' + isoDate
+                        + '|username=' + data[0].nodes[0].username
+                        + '|lat=' + data[0].nodes[0].lat
+                        + '|lon=' + data[0].nodes[0].lon
+                        + '|ca=' + data[0].nodes[0].ca
+                        + '}}';
+                    var destFile = data[0].location + ' - Mapillary.jpg';
+                    var commonsurl = 'https://commons.wikimedia.org/w/index.php?title=Special:Upload&uploadformstyle=basic&wpDestFile=' + destFile + '&wpUploadDescription=' + uploadDescription;
+                    $('#mapillary_button').html("<a href=\"" + commonsurl + "\">save image and click this link</a>");
+                }
+            });
         }
     }, false);
 
@@ -127,8 +145,7 @@ function whenMapMoves(e) {
 function setMarker(feature,latlng) {
     var popuptext;
     popuptext = '<table border=0 width=300px>';
-    if (feature.properties.monument_article)
-    {
+    if (feature.properties.monument_article){
         popuptext = popuptext + '<tr><td colspan=2><strong><a href="//'+feature.properties.lang+'.wikipedia.org/wiki/'+feature.properties.monument_article+'" target="_blank">'+feature.properties.name+'</a></strong></td></tr>';
     }else{
         popuptext = popuptext + '<tr><td colspan=2><strong>'+feature.properties.name+'</strong></td></tr>';
@@ -175,8 +192,8 @@ function setMarker(feature,latlng) {
                 if(data.length== 0) {
                     $('#'+klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>')
                 } else {
+                    popuptext = popuptext + getMapillaryImageByKey(data[0].key)
                     $('#'+klass).html('<div id="mapillary_button" class="mapillary_button '+klass+'"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
-
                 }
             }
         });
