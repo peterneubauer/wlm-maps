@@ -3,6 +3,7 @@
  * 
  * Created by Chris Hill <osm@raggedred.net> and contributors.
  * Adapted for Wiki Loves Monuments by Emijrp <emijrp@gmail.com>
+ * Adapted for Mapillary by peterneubauer <peter@neubauer.se>
  * 
  * This software and associated documentation files (the "Software") is
  * released under the CC0 Public Domain Dedication, version 1.0, as
@@ -28,7 +29,7 @@ function init() {
 
 
     var osmUrl='//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';    
-    var osmAttrib='Map data &copy; <a href="//openstreetmap.org" target="_blank">OpenStreetMap</a> contributors | <a href="//commons.wikimedia.org/wiki/Commons:Monuments_database" target="_blank">Monuments database</a> by Wikipedia editors | <a href="//github.com/emijrp/wlm-maps" target="_blank">Source code</a> by <a href="//en.wikipedia.org/wiki/User:Emijrp" target="_blank">emijrp</a> in GitHub';
+    var osmAttrib='Map data &copy; <a href="//openstreetmap.org" target="_blank">OpenStreetMap</a> contributors | <a href="//commons.wikimedia.org/wiki/Commons:Monuments_database" target="_blank">Monuments database</a> by Wikipedia editors | <a href="//github.com/peterneubauer/wlm-maps" target="_blank">Source code</a> by <a href="//en.wikipedia.org/wiki/User:Emijrp" target="_blank">emijrp</a> and peterneubauer in GitHub';
     
     withimageicon=L.icon({
     iconUrl: 'icons/withimageicon.png',
