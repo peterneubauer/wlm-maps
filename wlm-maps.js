@@ -108,14 +108,15 @@ function init() {
         );
 
     map.on('moveend', whenMapMoves);
-    window.addEventListener('message', function(event) {
+    window.addEventListener('message', function (event) {
 //        console.log('received message', event);
         var parsed = JSON.parse(event.data);
-        if(parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
+        if (parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
+            console.log('mapillary data Entering my crappy code');
             $.ajax({
                 url: 'https://a.mapillary.com/v2/g/' + parsed.data.key,
                 dataType: 'json',
-                success: function(data) {
+                success: function (data) {
                     console.log('mapillary data', data[0].nodes[0]);
                     var isoDate = new Date(data[0].nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
                     var uploadDescription = '{{subst:Mapillary'
@@ -129,7 +130,7 @@ function init() {
                         + '}}';
                     var destFile = data[0].location + ' - Mapillary.jpg';
                     var commonsurl = 'https://commons.wikimedia.org/w/index.php?title=Special:Upload&uploadformstyle=basic&wpDestFile=' + destFile + '&wpUploadDescription=' + uploadDescription;
-                    $('#mapillary_button').html("<a href=\"" + commonsurl + "\">save image and click this link</a>");
+                    $('#mapillary_button').html('<a href="' + commonsurl + '">save image and click this link</a>');
                 }
             });
         }
@@ -142,57 +143,58 @@ function whenMapMoves(e) {
     askForMonuments();
 }
 
-function setMarker(feature,latlng) {
+function setMarker(feature, latlng) {
     var popuptext;
     popuptext = '<table border=0 width=300px>';
-    if (feature.properties.monument_article){
-        popuptext = popuptext + '<tr><td colspan=2><strong><a href="//'+feature.properties.lang+'.wikipedia.org/wiki/'+feature.properties.monument_article+'" target="_blank">'+feature.properties.name+'</a></strong></td></tr>';
-    }else{
-        popuptext = popuptext + '<tr><td colspan=2><strong>'+feature.properties.name+'</strong></td></tr>';
+    if (feature.properties.monument_article) {
+        popuptext = popuptext + '<tr><td colspan=2><strong><a href="//' + feature.properties.lang + '.wikipedia.org/wiki/' + feature.properties.monument_article + '" target="_blank">' + feature.properties.name + '</a></strong></td></tr>';
+    } else {
+        popuptext = popuptext + '<tr><td colspan=2><strong>' + feature.properties.name + '</strong></td></tr>';
     }
-    var thumb_url = '//upload.wikimedia.org/wikipedia/commons/thumb/' + feature.properties.md5.substring(0,1) + '/' + feature.properties.md5.substring(0,2) + '/' + feature.properties.image + '/150px-' + feature.properties.image;
-    popuptext = popuptext + '<tr><td valign=top><b>ID:</b> '+feature.properties.id+'<br/><b>Country:</b> '+feature.properties.country+'</td><td><a href="//commons.wikimedia.org/wiki/File:'+feature.properties.image+'" target="_blank"><img src="'+thumb_url+'" /></a></td></tr>';
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-'+feature.properties.country+'&id='+feature.properties.id+'" target="_blank"><b>Upload your photo</b></a></td></tr>';
-    var klass = 'mapillary_'+feature.properties.id
-        .replace(/[<> \/-]/g,'_')
+    var thumb_url = '//upload.wikimedia.org/wikipedia/commons/thumb/' + feature.properties.md5.substring(0, 1) + '/' + feature.properties.md5.substring(0, 2) + '/' + feature.properties.image + '/150px-' + feature.properties.image;
+    popuptext = popuptext + '<tr><td valign=top><b>ID:</b> ' + feature.properties.id + '<br/><b>Country:</b> ' + feature.properties.country + '</td><td><a href="//commons.wikimedia.org/wiki/File:' + feature.properties.image + '" target="_blank"><img src="' + thumb_url + '" /></a></td></tr>';
+    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><a href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-' + feature.properties.country + '&id=' + feature.properties.id + '" target="_blank"><b>Upload your photo</b></a></td></tr>';
+    var klass = 'mapillary_' + feature.properties.id
+        .replace(/[<> \/-]/g, '_')
         .replace(/\)/g, '_')
         .replace(/\(/g, '_')
         .replace(/\}/g, '_');
 //    console.log(feature.properties.id, klass);
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="'+klass+'">Check Mapillary</button></td></tr>';
-    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="'+klass+'"></div></td></tr>';
-    if (feature.properties.commonscat)
-    {
-        popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;">(<a href="//commons.wikimedia.org/wiki/Category:'+feature.properties.commonscat+'" target="_blank">More images in Commons</a>)</td></tr>';
+    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="' + klass + '">Check Mapillary</button></td></tr>';
+    popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="' + klass + '"></div></td></tr>';
+    if (feature.properties.commonscat) {
+        popuptext = popuptext + '<tr><td colspan=2 style="text-align: center;">(<a href="//commons.wikimedia.org/wiki/Category:' + feature.properties.commonscat + '" target="_blank">More images in Commons</a>)</td></tr>';
     }
     popuptext = popuptext + '</table>';
 
 //    popuptext = popuptext + link;
 
     var icon;
-    if (feature.properties.image != 'Monument_unknown.png')
-    {
+    if (feature.properties.image != 'Monument_unknown.png') {
         icon = withimageicon;
-    }else{
+    } else {
         icon = withoutimageicon;
     }
-    var monument; 
-    monument=L.marker(latlng, {icon: icon});
+    var monument;
+    monument = L.marker(latlng, {icon: icon});
     monument.bindPopup(popuptext, {minWidth: 300});
-    $('#mapdiv').on('click', '.'+klass,  function(event) {
+    $('#mapdiv').on('click', '.' + klass,  function (event) {
         event.stopPropagation();
-        var url = 'https://mapillary-read-api.herokuapp.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=1';
+        var url = 'https://mapillary-read-api.herokuapp.com/v1/im/close'
+            + '?lat=' + feature.geometry.coordinates[1]
+            + '&lon=' + feature.geometry.coordinates[0]
+            + '&distance=100&limit=1';
         console.log('mapillary request', url);
-        $('#'+klass).html('<div class="loading overlay">Loading ...</div>');
+        $('#' + klass).html('<div class="loading overlay">Loading ...</div>');
         $.ajax({
             url: url,
             dataType: 'json',
-            success: function(data) {
-                console.log('mapillary data',data[0]);
-                if(data.length== 0) {
-                    $('#'+klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>')
+            success: function (data) {
+                console.log('mapillary data', data[0]);
+                if (data.length == 0) {
+                    $('#' + klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>');
                 } else {
-                    $('#'+klass).html('<div id="mapillary_button" class="mapillary_button '+klass+'"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image='+data[0].key+'"/>')
+                    $('#' + klass).html('<div id="mapillary_button" class="mapillary_button ' + klass + '"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image=' + data[0].key + '"/>');
                 }
             }
         });
@@ -203,10 +205,10 @@ function setMarker(feature,latlng) {
 function askForMonuments() {
     var mobile;
     mobile = '0';
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 800 && window.innerHeight <= 600) ) {
+    if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 800 && window.innerHeight <= 600) ) {
         mobile = '1';
     }
-    var data='bbox=' + map.getBounds().toBBoxString() + '&mobile=' + mobile;
+    var data = 'bbox=' + map.getBounds().toBBoxString() + '&mobile=' + mobile;
     document.getElementById('wait').style.display = 'block';
     $.ajax({
         url: 'ajaxmonuments.php',
