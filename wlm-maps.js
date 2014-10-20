@@ -182,13 +182,13 @@ function setMarker(feature,latlng) {
     $('#mapdiv').on('click', '.'+klass,  function(event) {
         event.stopPropagation();
         var url = 'https://mapillary-read-api.herokuapp.com/v1/im/close?lat=' + feature.geometry.coordinates[1] + '&lon=' + feature.geometry.coordinates[0] + '&distance=100&limit=1';
-//        console.log('mapillary request', url);
+        console.log('mapillary request', url);
         $('#'+klass).html('<div class="loading overlay">Loading ...</div>');
         $.ajax({
             url: url,
             dataType: 'json',
             success: function(data) {
-//                console.log('mapillary data',data[0]);
+                console.log('mapillary data',data[0]);
                 if(data.length== 0) {
                     $('#'+klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>')
                 } else {
