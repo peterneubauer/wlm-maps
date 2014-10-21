@@ -134,15 +134,16 @@ function init() {
                         + '|lon=' + parseddata.nodes[0].lon
                         + '|ca=' + parseddata.nodes[0].ca
                         + '}}';
-                    var destFile = parseddata.location + ' - Mapillary.jpg';
+                    var destFile = parseddata.nodes[0].location + ' - Mapillary (' + parseddata.nodes[0].key + '.jpg';
                     var commonsurl = 'https://commons.wikimedia.org/w/index.php?title=Special:Upload'
                         + '&uploadformstyle=basic'
                         + '&wpDestFile=' + destFile
                         + '&wpUploadDescription=' + uploadDescription;
-                    $('#mapillary_button').html('<a href="' + commonsurl + '" target="_blank">save image and click this link</a>');
+                    var imageurl = parseddata.nodes[0].image
+                    $('#mapillary_button').html('Download <a href="' + imageurl + '" target="_blank">the image</a> and then <a href="' + commonsurl + '" target="_blank">go here</a>.');
                 },
                 error: function(jqxhr, textStatus, errorThrown) {
-                    alert("My ajax call failed");
+                    alert("The ajax call failed");
                     console.log(textStatus);
                     console.log(errorThrown);
                 }
