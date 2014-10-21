@@ -129,8 +129,11 @@ function init() {
                         + '|ca=' + data[0].nodes[0].ca
                         + '}}';
                     var destFile = data[0].location + ' - Mapillary.jpg';
-                    var commonsurl = 'https://commons.wikimedia.org/w/index.php?title=Special:Upload&uploadformstyle=basic&wpDestFile=' + destFile + '&wpUploadDescription=' + uploadDescription;
-                    $('#mapillary_button').html('<a href="' + commonsurl + '">save image and click this link</a>');
+                    var commonsurl = 'https://commons.wikimedia.org/w/index.php?title=Special:Upload'
+                        + '&uploadformstyle=basic'
+                        + '&wpDestFile=' + destFile
+                        + '&wpUploadDescription=' + uploadDescription;
+                    $('#mapillary_button').html('<a href="' + commonsurl + '" target="_blank">save image and click this link</a>');
                 }
             });
         }
@@ -159,7 +162,7 @@ function setMarker(feature, latlng) {
         .replace(/\)/g, '_')
         .replace(/\(/g, '_')
         .replace(/\}/g, '_');
-    console.log(feature.properties.id, klass);
+//    console.log(feature.properties.id, klass);
     popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="' + klass + '">Check Mapillary</button></td></tr>';
     popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="' + klass + '"></div></td></tr>';
     if (feature.properties.commonscat) {
