@@ -159,7 +159,7 @@ function setMarker(feature, latlng) {
         .replace(/\)/g, '_')
         .replace(/\(/g, '_')
         .replace(/\}/g, '_');
-//    console.log(feature.properties.id, klass);
+    console.log(feature.properties.id, klass);
     popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="' + klass + '">Check Mapillary</button></td></tr>';
     popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="' + klass + '"></div></td></tr>';
     if (feature.properties.commonscat) {
