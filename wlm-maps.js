@@ -115,7 +115,7 @@ function init() {
             console.log('Entering my crappy code');
             $.ajax({
                 url: 'https://a.mapillary.com/v2/g/' + parsed.data.key,
-                dataType: 'json',
+                dataType: 'text',
                 success: function (data) {
                     alert("Got Mapillary image data");
                     console.log('mapillary data', data[0]);
