@@ -113,6 +113,7 @@ function init() {
         var parsed = JSON.parse(event.data);
         if (parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
             console.log('Entering my crappy code');
+            console.log('url https://a.mapillary.com/v2/g/' + parsed.data.key);
             $.ajax({
                 url: 'https://a.mapillary.com/v2/g/' + parsed.data.key,
                 dataType: 'text',
@@ -138,15 +139,8 @@ function init() {
                 },
                 error: function(jqxhr, textStatus, errorThrown) {
                     alert("My ajax call failed");
-                    console.log(jqxhr);
                     console.log(textStatus);
                     console.log(errorThrown);
-                    for (key in jqxhr)
-                        alert(key + ":" + jqxhr[key])
-                    for (key2 in textStatus)
-                        alert(key + ":" + textStatus[key])
-                    for (key3 in errorThrown)
-                        alert(key + ":" + errorThrown[key])
                 }
             });
         }
@@ -201,13 +195,13 @@ function setMarker(feature, latlng) {
             + '?lat=' + feature.geometry.coordinates[1]
             + '&lon=' + feature.geometry.coordinates[0]
             + '&distance=100&limit=1';
-        console.log('mapillary request', url);
+//        console.log('mapillary request', url);
         $('#' + klass).html('<div class="loading overlay">Loading ...</div>');
         $.ajax({
             url: url,
             dataType: 'json',
             success: function (data) {
-                console.log('mapillary data', data[0]);
+//                console.log('mapillary data', data[0]);
                 if (data.length == 0) {
                     $('#' + klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>');
                 } else {
