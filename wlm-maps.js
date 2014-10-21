@@ -119,7 +119,7 @@ function init() {
                 url: url,
                 dataType: 'text',
                 success: function (data) {
-                    alert("Got Mapillary image data");
+//                    alert("Got Mapillary image data");
                     console.log('raw mapillary data', data);
                     var parseddata = JSON.parse(data);
                     console.log('parsed mapillary data', parseddata);
@@ -134,7 +134,7 @@ function init() {
                         '|lon=' + parseddata.nodes[0].lon +
                         '|ca=' + parseddata.nodes[0].ca +
                         '}}';
-                    var destFile = parseddata.nodes[0].location + ' - Mapillary (' + parseddata.nodes[0].key + '.jpg';
+                    var destFile = parseddata.nodes[0].location + ' - Mapillary (' + parseddata.nodes[0].key + ').jpg';
                     var commonsurl = 'https://commons.wikimedia.org/w/index.php?title=Special:Upload' +
                         '&uploadformstyle=basic' +
                         '&wpDestFile=' + destFile +
