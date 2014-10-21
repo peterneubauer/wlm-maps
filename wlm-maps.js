@@ -113,12 +113,11 @@ function init() {
         var parsed = JSON.parse(event.data);
         if (parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
             var url = 'https://a.mapillary.com/v2/g/' + parsed.data.key;
-            console.log('Image info url: ', url);
+//            console.log('Image info url: ', url);
             $.ajax({
                 url: url,
                 dataType: 'text',
                 success: function (data) {
-//                    alert("Got Mapillary image data");
 //                    console.log('raw mapillary data', data);
                     var parseddata = JSON.parse(data);
 //                    console.log('parsed mapillary data', parseddata);
@@ -142,7 +141,6 @@ function init() {
 //                    $('#mapillary_button').html('Download <a href="' + imageurl + '" target="_blank">the image</a> and then <a href="' + commonsurl + '" target="_blank">go here</a>.');
                     var magnusurl = '//tools.wmflabs.org/url2commons/index.html?urls=' + imageurl + ' ' + destFile + '|' + encodeURIComponent(uploadDescription) + '&desc=$DESCRIPTOR$';
                     $('#mapillary_button').html('Upload directly as <br /><a href="' + magnusurl + '" target="_blank"><font size="2">' + destFile + '</font></a>.');
-//                  http://repl.it/1wG
                 },
                 error: function (jqxhr, textStatus, errorThrown) {
                     alert("The ajax call failed");
