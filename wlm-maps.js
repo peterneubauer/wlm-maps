@@ -112,12 +112,13 @@ function init() {
 //        console.log('received message', event);
         var parsed = JSON.parse(event.data);
         if (parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
-            console.log('mapillary data Entering my crappy code');
+            console.log('Entering my crappy code');
             $.ajax({
                 url: 'https://a.mapillary.com/v2/g/' + parsed.data.key,
                 dataType: 'json',
                 success: function (data) {
-                    console.log('mapillary data', data[0].nodes[0]);
+                    alert("Got Mapillary image data");
+                    console.log('mapillary data', data[0]);
                     var isoDate = new Date(data[0].nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
                     var uploadDescription = '{{subst:Mapillary'
                         + '|location=' + data[0].nodes[0].location
@@ -134,6 +135,18 @@ function init() {
                         + '&wpDestFile=' + destFile
                         + '&wpUploadDescription=' + uploadDescription;
                     $('#mapillary_button').html('<a href="' + commonsurl + '" target="_blank">save image and click this link</a>');
+                },
+                error: function(jqxhr, textStatus, errorThrown) {
+                    alert("My ajax call failed");
+                    console.log(jqxhr);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                    for (key in jqxhr)
+                        alert(key + ":" + jqxhr[key])
+                    for (key2 in textStatus)
+                        alert(key + ":" + textStatus[key])
+                    for (key3 in errorThrown)
+                        alert(key + ":" + errorThrown[key])
                 }
             });
         }
