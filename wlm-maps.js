@@ -121,20 +121,20 @@ function init() {
                 success: function (data) {
                     alert("Got Mapillary image data");
                     console.log('raw mapillary data', data);
-                    var parsedData = JSON.parse(data)
-                    console.log('parsed mapillary data', parsedData);
-                    console.log('nodes of mapillary data', parsedData.nodes[0]);
-                    var isoDate = new Date(data[0].nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
+                    var parseddata = JSON.parse(data)
+                    console.log('parsed mapillary data', parseddata);
+                    console.log('nodes of mapillary data', parseddata.nodes[0]);
+                    var isoDate = new Date(parseddata.nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
                     var uploadDescription = '{{subst:Mapillary'
-                        + '|location=' + data[0].nodes[0].location
-                        + '|key=' + data[0].nodes[0].key
+                        + '|location=' + parseddata.nodes[0].location
+                        + '|key=' + parseddata.nodes[0].key
                         + '|date=' + isoDate
-                        + '|username=' + data[0].nodes[0].username
-                        + '|lat=' + data[0].nodes[0].lat
-                        + '|lon=' + data[0].nodes[0].lon
-                        + '|ca=' + data[0].nodes[0].ca
+                        + '|username=' + parseddata.nodes[0].username
+                        + '|lat=' + parseddata.nodes[0].lat
+                        + '|lon=' + parseddata.nodes[0].lon
+                        + '|ca=' + parseddata.nodes[0].ca
                         + '}}';
-                    var destFile = data[0].location + ' - Mapillary.jpg';
+                    var destFile = parseddata.location + ' - Mapillary.jpg';
                     var commonsurl = 'https://commons.wikimedia.org/w/index.php?title=Special:Upload'
                         + '&uploadformstyle=basic'
                         + '&wpDestFile=' + destFile
