@@ -113,13 +113,17 @@ function init() {
         var parsed = JSON.parse(event.data);
         if (parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
             console.log('Entering my crappy code');
-            console.log('url https://a.mapillary.com/v2/g/' + parsed.data.key);
+            var url = 'https://a.mapillary.com/v2/g/' + parsed.data.key;
+            console.log('Image info url: ', url);
             $.ajax({
-                url: 'https://a.mapillary.com/v2/g/' + parsed.data.key,
+                url: url,
                 dataType: 'text',
                 success: function (data) {
                     alert("Got Mapillary image data");
-                    console.log('mapillary data', data[0]);
+                    console.log('raw mapillary data', data);
+                    var parsedData = JSON.parse(data)
+                    console.log('parsed mapillary data', parsedData);
+                    console.log('nodes of mapillary data', parsedData.nodes[0]);
                     var isoDate = new Date(data[0].nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
                     var uploadDescription = '{{subst:Mapillary'
                         + '|location=' + data[0].nodes[0].location
