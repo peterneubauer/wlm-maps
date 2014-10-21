@@ -141,7 +141,7 @@ function init() {
 //                        '&wpUploadDescription=' + uploadDescription;
 //                    $('#mapillary_button').html('Download <a href="' + imageurl + '" target="_blank">the image</a> and then <a href="' + commonsurl + '" target="_blank">go here</a>.');
                     var magnusurl = '//tools.wmflabs.org/url2commons/index.html?urls=' + imageurl + ' ' + destFile + '|' + encodeURIComponent(uploadDescription) + '&desc=$DESCRIPTOR$';
-                    $('#mapillary_button').html('Upload directly as <a href="' + magnusurl + '" target="_blank"><small>' + destFile + '</small></a>.');
+                    $('#mapillary_button').html('Upload directly as <br /><a href="' + magnusurl + '" target="_blank"><font size="2">' + destFile + '</font></a>.');
 //                  http://repl.it/1wG
                 },
                 error: function (jqxhr, textStatus, errorThrown) {
