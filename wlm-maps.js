@@ -121,28 +121,29 @@ function init() {
                 success: function (data) {
                     alert("Got Mapillary image data");
                     console.log('raw mapillary data', data);
-                    var parseddata = JSON.parse(data)
+                    var parseddata = JSON.parse(data);
                     console.log('parsed mapillary data', parseddata);
                     console.log('nodes of mapillary data', parseddata.nodes[0]);
                     var isoDate = new Date(parseddata.nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
-                    var uploadDescription = '{{subst:Mapillary'
-                        + '|location=' + parseddata.nodes[0].location
-                        + '|key=' + parseddata.nodes[0].key
-                        + '|date=' + isoDate
-                        + '|username=' + parseddata.nodes[0].username
-                        + '|lat=' + parseddata.nodes[0].lat
-                        + '|lon=' + parseddata.nodes[0].lon
-                        + '|ca=' + parseddata.nodes[0].ca
-                        + '}}';
+                    var uploadDescription = '{{subst:Mapillary' +
+                        '|location=' + parseddata.nodes[0].location +
+                        '|key=' + parseddata.nodes[0].key +
+                        '|date=' + isoDate +
+                        '|username=' + parseddata.nodes[0].username +
+                        '|lat=' + parseddata.nodes[0].lat +
+                        '|lon=' + parseddata.nodes[0].lon +
+                        '|ca=' + parseddata.nodes[0].ca +
+                        '}}';
                     var destFile = parseddata.nodes[0].location + ' - Mapillary (' + parseddata.nodes[0].key + '.jpg';
-                    var commonsurl = 'https://commons.wikimedia.org/w/index.php?title=Special:Upload'
-                        + '&uploadformstyle=basic'
-                        + '&wpDestFile=' + destFile
-                        + '&wpUploadDescription=' + uploadDescription;
-                    var imageurl = parseddata.nodes[0].image
+                    var commonsurl = 'https://commons.wikimedia.org/w/index.php?title=Special:Upload' +
+                        '&uploadformstyle=basic' +
+                        '&wpDestFile=' + destFile +
+                        '&wpUploadDescription=' + uploadDescription;
+                    var imageurl = parseddata.nodes[0].image.replace('thumb-1024.jpg', 'thumb-2048.jpg');  //request larger size
                     $('#mapillary_button').html('Download <a href="' + imageurl + '" target="_blank">the image</a> and then <a href="' + commonsurl + '" target="_blank">go here</a>.');
+//                  http://repl.it/1wG
                 },
-                error: function(jqxhr, textStatus, errorThrown) {
+                error: function (jqxhr, textStatus, errorThrown) {
                     alert("The ajax call failed");
                     console.log(textStatus);
                     console.log(errorThrown);
@@ -196,10 +197,10 @@ function setMarker(feature, latlng) {
     monument.bindPopup(popuptext, {minWidth: 300});
     $('#mapdiv').on('click', '.' + klass,  function (event) {
         event.stopPropagation();
-        var url = 'https://mapillary-read-api.herokuapp.com/v1/im/close'
-            + '?lat=' + feature.geometry.coordinates[1]
-            + '&lon=' + feature.geometry.coordinates[0]
-            + '&distance=100&limit=1';
+        var url = 'https://mapillary-read-api.herokuapp.com/v1/im/close' +
+            '?lat=' + feature.geometry.coordinates[1] +
+            '&lon=' + feature.geometry.coordinates[0] +
+            '&distance=100&limit=1';
 //        console.log('mapillary request', url);
         $('#' + klass).html('<div class="loading overlay">Loading ...</div>');
         $.ajax({
