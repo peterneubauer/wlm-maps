@@ -122,6 +122,10 @@ function init() {
                     var parseddata = JSON.parse(data);
 //                    console.log('parsed mapillary data', parseddata);
                     console.log('nodes of parsed mapillary data', parseddata.nodes[0]);
+                    if (parseddata.nodes[0].location == '') {
+                        parseddata.nodes[0].location = prompt("Please enter a short description of the location", "");
+                    };
+                    alert("parseddata.nodes[0].location = " + parseddata.nodes[0].location);
                     var isoDate = new Date(parseddata.nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
                     var uploadDescription = '{{subst:Mapillary' +
                         '|location=' + parseddata.nodes[0].location +
@@ -134,11 +138,6 @@ function init() {
                         '}}';
                     var destFile = parseddata.nodes[0].location + ' - Mapillary (' + parseddata.nodes[0].key + ').jpg';
                     var imageurl = parseddata.nodes[0].image.replace('thumb-1024.jpg', 'thumb-2048.jpg');  //request larger size
-//                    var commonsurl = 'https://commons.wikimedia.org/w/index.php?title=Special:Upload' +
-//                        '&uploadformstyle=basic' +
-//                        '&wpDestFile=' + destFile +
-//                        '&wpUploadDescription=' + uploadDescription;
-//                    $('#mapillary_button').html('Download <a href="' + imageurl + '" target="_blank">the image</a> and then <a href="' + commonsurl + '" target="_blank">go here</a>.');
                     var magnusurl = '//tools.wmflabs.org/url2commons/index.html?urls=' + imageurl + ' ' + destFile + '|' + encodeURIComponent(uploadDescription) + '&desc=$DESCRIPTOR$';
                     $('#mapillary_button').html('Upload directly as <br /><a href="' + magnusurl + '" target="_blank"><font size="2">' + destFile + '</font></a>.');
                 },
