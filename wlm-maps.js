@@ -112,40 +112,45 @@ function init() {
 //        console.log('received message', event);
         var parsed = JSON.parse(event.data);
         if (parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
-            var url = 'https://a.mapillary.com/v2/g/' + parsed.data.key;
-//            console.log('Image info url: ', url);
-            $.ajax({
-                url: url,
-                dataType: 'text',
-                success: function (data) {
-//                    console.log('raw mapillary data', data);
-                    var parseddata = JSON.parse(data);
-//                    console.log('parsed mapillary data', parseddata);
-                    console.log('nodes of parsed mapillary data', parseddata.nodes[0]);
-                    while (parseddata.nodes[0].location == '') {
-                        parseddata.nodes[0].location = prompt("Please enter a short description of the location", "");
-                    };
-//                    alert("parseddata.nodes[0].location = " + parseddata.nodes[0].location);
-                    var isoDate = new Date(parseddata.nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
-                    var uploadDescription = '{{subst:Mapillary' +
-                        '|location=' + parseddata.nodes[0].location +
-                        '|key=' + parseddata.nodes[0].key +
-                        '|date=' + isoDate +
-                        '|username=' + parseddata.nodes[0].username +
-                        '|lat=' + parseddata.nodes[0].lat +
-                        '|lon=' + parseddata.nodes[0].lon +
-                        '|ca=' + parseddata.nodes[0].ca +
-                        '}}';
-                    var destFile = parseddata.nodes[0].location + ' - Mapillary (' + parseddata.nodes[0].key + ').jpg';
-                    var imageurl = parseddata.nodes[0].image.replace('thumb-1024.jpg', 'thumb-2048.jpg');  //request larger size
-                    var magnusurl = '//tools.wmflabs.org/url2commons/index.html?urls=' + imageurl + ' ' + destFile + '|' + encodeURIComponent(uploadDescription) + '&desc=$DESCRIPTOR$';
-                    $('#mapillary_button').html('Upload directly as <br /><a href="' + magnusurl + '" target="_blank"><font size="2">' + destFile + '</font></a>.');
-                },
-                error: function (jqxhr, textStatus, errorThrown) {
-                    alert("The ajax call failed");
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                }
+            $('#mapillary_button').html('<button id="upload_button">Upload Mapillary image</button>');
+            $('#upload_button').on('click', function () {
+              var url = 'https://a.mapillary.com/v2/g/' + parsed.data.key;
+//                console.log('Image info url: ', url);
+                $.ajax({
+                    url: url,
+                    dataType: 'text',
+                    success: function (data) {
+//                        console.log('raw mapillary data', data);
+                        var parseddata = JSON.parse(data);
+//                        console.log('parsed mapillary data', parseddata);
+                        console.log('nodes of parsed mapillary data', parseddata.nodes[0]);
+                        while (parseddata.nodes[0].location == '') {
+                            parseddata.nodes[0].location = prompt("Please enter a short description of the location", "");
+                        }
+//                        alert("parseddata.nodes[0].location = " + parseddata.nodes[0].location);
+                        var isoDate = new Date(parseddata.nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
+                        var uploadDescription = '{{subst:Mapillary' +
+                            '|location=' + parseddata.nodes[0].location +
+                            '|key=' + parseddata.nodes[0].key +
+                            '|date=' + isoDate +
+                            '|username=' + parseddata.nodes[0].username +
+                            '|lat=' + parseddata.nodes[0].lat +
+                            '|lon=' + parseddata.nodes[0].lon +
+                            '|ca=' + parseddata.nodes[0].ca +
+                            '}}';
+                        var destFile = parseddata.nodes[0].location + ' - Mapillary (' + parseddata.nodes[0].key + ').jpg';
+                        var imageurl = parseddata.nodes[0].image.replace('thumb-1024.jpg', 'thumb-2048.jpg');  //request larger size
+                        var magnusurl = '//tools.wmflabs.org/url2commons/index.html?urls=' + imageurl + ' ' + destFile + '|' + encodeURIComponent(uploadDescription) + '&desc=$DESCRIPTOR$';
+                        console.log('Ready to produce upload link');
+                        $('#upload_button').html('Click link to upload as <br /><a href="' + magnusurl + '" target="_blank"><font size="2">' + destFile + '</font></a>.');
+//                        $('#upload_button').html('Uploaded directly as <br /><font size="2">' + destFile + '</font>');
+                    },
+                    error: function (jqxhr, textStatus, errorThrown) {
+                        alert("The ajax call failed");
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+                });
             });
         }
     }, false);
