@@ -122,10 +122,10 @@ function init() {
                     var parseddata = JSON.parse(data);
 //                    console.log('parsed mapillary data', parseddata);
                     console.log('nodes of parsed mapillary data', parseddata.nodes[0]);
-                    if (parseddata.nodes[0].location == '') {
+                    while (parseddata.nodes[0].location == '') {
                         parseddata.nodes[0].location = prompt("Please enter a short description of the location", "");
                     };
-                    alert("parseddata.nodes[0].location = " + parseddata.nodes[0].location);
+//                    alert("parseddata.nodes[0].location = " + parseddata.nodes[0].location);
                     var isoDate = new Date(parseddata.nodes[0].captured_at).toISOString().replace(/T/g, ' ').replace(/.000Z/g, '');
                     var uploadDescription = '{{subst:Mapillary' +
                         '|location=' + parseddata.nodes[0].location +
