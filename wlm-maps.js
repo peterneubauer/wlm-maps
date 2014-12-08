@@ -118,7 +118,7 @@ function init() {
 //                console.log('Image info url: ', url);
                 $.ajax({
                     url: url,
-                    dataType: 'text',
+                    dataType: 'json',
                     success: function (data) {
 //                        console.log('raw mapillary data', data);
                         var parseddata = JSON.parse(data);
