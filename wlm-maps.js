@@ -109,10 +109,9 @@ function init() {
 
     map.on('moveend', whenMapMoves);
     window.addEventListener('message', function (event) {
-//        console.log('received message', event);
         var parsed = JSON.parse(event.data);
         if (parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
-            $('#mapillary_button').html('<button id="upload_button">Upload Mapillary image</button>');
+            $('#mapillary_button').html('<button id="upload_button">Upload Mapillary image</button><button id="submit_button">Submit Mapillary image</button>');
             $('#upload_button').on('click', function () {
               var url = 'https://a.mapillary.com/v2/g/' + parsed.data.key+"?client_id=NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2";
 //                console.log('Image info url: ', url);
@@ -142,7 +141,7 @@ function init() {
                         var imageurl = parseddata.nodes[0].image.replace('thumb-1024.jpg', 'thumb-2048.jpg');  //request larger size
                         var magnusurl = '//tools.wmflabs.org/url2commons/index.html?urls=' + imageurl + ' ' + destFile + '|' + encodeURIComponent(uploadDescription) + '&desc=$DESCRIPTOR$';
                         console.log('Ready to produce upload link');
-                        $('#upload_button').html('Click link to upload as <br /><a href="' + magnusurl + '" target="_blank"><font size="2">' + destFile + '</font></a>.');
+                        $('#submit_button').html('Click link to upload as <br /><a href="' + magnusurl + '" target="_blank"><font size="2">' + destFile + '</font></a>.');
 //                        $('#upload_button').html('Uploaded directly as <br /><font size="2">' + destFile + '</font>');
                     },
                     error: function (jqxhr, textStatus, errorThrown) {
