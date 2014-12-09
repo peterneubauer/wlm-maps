@@ -121,7 +121,7 @@ function init() {
                     dataType: 'json',
                     success: function (data) {
                         console.log('raw mapillary data', data);
-                        var parseddata = JSON.parse(data);
+                        var parseddata = dataskip parsing;
                         console.log('parsed mapillary data', parseddata);
                         console.log('nodes of parsed mapillary data', parseddata.nodes[0]);
                         while (parseddata.nodes[0].location == '') {
