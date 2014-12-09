@@ -114,7 +114,7 @@ function init() {
         if (parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
             $('#mapillary_button').html('<button id="upload_button">Upload Mapillary image</button>');
             $('#upload_button').on('click', function () {
-              var url = 'https://a.mapillary.com/v2/g/' + parsed.data.key;
+              var url = 'https://a.mapillary.com/v2/g/' + parsed.data.key+"?cliend_id=NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2";
 //                console.log('Image info url: ', url);
                 $.ajax({
                     url: url,
