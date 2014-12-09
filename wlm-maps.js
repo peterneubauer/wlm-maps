@@ -120,9 +120,9 @@ function init() {
                     url: url,
                     dataType: 'json',
                     success: function (data) {
-//                        console.log('raw mapillary data', data);
+                        console.log('raw mapillary data', data);
                         var parseddata = JSON.parse(data);
-//                        console.log('parsed mapillary data', parseddata);
+                        console.log('parsed mapillary data', parseddata);
                         console.log('nodes of parsed mapillary data', parseddata.nodes[0]);
                         while (parseddata.nodes[0].location == '') {
                             parseddata.nodes[0].location = prompt("Please enter a short description of the location", "");
