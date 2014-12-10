@@ -216,7 +216,7 @@ function setMarker(feature, latlng) {
                 if (data.length == 0) {
                     $('#mapillary_container').html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>');
                 } else {
-                    $('#mapillary_container').html('<div id="mapillary_button" class="mapillary_button ' + klass + '"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image=' + data[0].key + '"/>');
+                    $('#mapillary_container').html('<div id="mapillary_button"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image=' + data[0].key + '"/>');
                 }
             }
         });
