@@ -201,6 +201,7 @@ function setMarker(feature, latlng) {
     monument.bindPopup(popuptext, {minWidth: 300});
     $('#mapdiv').on('click', '.' + klass,  function (event) {
         event.stopPropagation();
+        console.log('event.currentTarget', event);
         var url = 'https://mapillary-read-api.herokuapp.com/v1/im/close' +
             '?lat=' + feature.geometry.coordinates[1] +
             '&lon=' + feature.geometry.coordinates[0] +
