@@ -109,6 +109,7 @@ function init() {
 
     map.on('moveend', whenMapMoves);
     window.addEventListener('message', function (event) {
+        console.log('got event', event);
         var parsed = JSON.parse(event.data);
         if (parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
             $('#mapillary_button').html('<button id="upload_button">Upload Mapillary image</button><button id="submit_button">Submit Mapillary image</button>');
@@ -180,6 +181,7 @@ function setMarker(feature, latlng) {
         .replace(/'/g, '_');
 //    console.log(feature.properties.id, klass);
     popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="' + klass + '">Check Mapillary</button></td></tr>';
+    popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="mapillary_container"/></td></tr>';
     popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="' + klass + '"></div></td></tr>';
     if (feature.properties.commonscat) {
         popuptext += '<tr><td colspan=2 style="text-align: center;">(<a href="//commons.wikimedia.org/wiki/Category:' + feature.properties.commonscat + '" target="_blank">More images in Commons</a>)</td></tr>';
@@ -211,9 +213,9 @@ function setMarker(feature, latlng) {
             success: function (data) {
 //                console.log('mapillary data', data[0]);
                 if (data.length == 0) {
-                    $('#' + klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>');
+                    $('#mapillary_container').html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>');
                 } else {
-                    $('#' + klass).html('<div id="mapillary_button" class="mapillary_button ' + klass + '"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image=' + data[0].key + '"/>');
+                    $('#mapillary_container').html('<div id="mapillary_button" class="mapillary_button ' + klass + '"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image=' + data[0].key + '"/>');
                 }
             }
         });
