@@ -218,6 +218,7 @@ function setMarker(feature, latlng) {
                 } else {
                     $('#mapillary_container').html('<div id="mapillary_button"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image=' + data[0].key + '"/>');
                 }
+                $('#' + klass).html('');
             }
         });
     });
