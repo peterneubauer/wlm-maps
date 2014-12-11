@@ -109,10 +109,10 @@ function init() {
 
     map.on('moveend', whenMapMoves);
     window.addEventListener('message', function (event) {
-//        console.log('received message', event);
+        console.log('got event', event);
         var parsed = JSON.parse(event.data);
         if (parsed != undefined && parsed.name != undefined && parsed.name === "imageChanged") {
-            $('#mapillary_button').html('<button id="upload_button">Upload Mapillary image</button>');
+            $('#mapillary_button').html('<button id="upload_button">Upload Mapillary image</button><button id="submit_button">Submit Mapillary image</button>');
             $('#upload_button').on('click', function () {
               var url = 'https://a.mapillary.com/v2/g/' + parsed.data.key+"?client_id=NzNRM2otQkR2SHJzaXJmNmdQWVQ0dzoxNjQ3MDY4ZTUxY2QzNGI2";
 //                console.log('Image info url: ', url);
@@ -142,7 +142,7 @@ function init() {
                         var imageurl = parseddata.nodes[0].image.replace('thumb-1024.jpg', 'thumb-2048.jpg');  //request larger size
                         var magnusurl = '//tools.wmflabs.org/url2commons/index.html?urls=' + imageurl + ' ' + destFile + '|' + encodeURIComponent(uploadDescription) + '&desc=$DESCRIPTOR$';
                         console.log('Ready to produce upload link');
-                        $('#upload_button').html('Click link to upload as <br /><a href="' + magnusurl + '" target="_blank"><font size="2">' + destFile + '</font></a>.');
+                        $('#submit_button').html('Click link to upload as <br /><a href="' + magnusurl + '" target="_blank"><font size="2">' + destFile + '</font></a>.');
 //                        $('#upload_button').html('Uploaded directly as <br /><font size="2">' + destFile + '</font>');
                     },
                     error: function (jqxhr, textStatus, errorThrown) {
@@ -181,6 +181,7 @@ function setMarker(feature, latlng) {
         .replace(/'/g, '_');
 //    console.log(feature.properties.id, klass);
     popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><button class="' + klass + '">Check Mapillary</button></td></tr>';
+    popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="mapillary_container"/></td></tr>';
     popuptext += '<tr><td colspan=2 style="text-align: center;font-size: 150%;"><div id="' + klass + '"></div></td></tr>';
     if (feature.properties.commonscat) {
         popuptext += '<tr><td colspan=2 style="text-align: center;">(<a href="//commons.wikimedia.org/wiki/Category:' + feature.properties.commonscat + '" target="_blank">More images in Commons</a>)</td></tr>';
@@ -200,6 +201,7 @@ function setMarker(feature, latlng) {
     monument.bindPopup(popuptext, {minWidth: 300});
     $('#mapdiv').on('click', '.' + klass,  function (event) {
         event.stopPropagation();
+        console.log('event.currentTarget', event);
         var url = 'https://mapillary-read-api.herokuapp.com/v1/im/close' +
             '?lat=' + feature.geometry.coordinates[1] +
             '&lon=' + feature.geometry.coordinates[0] +
@@ -212,10 +214,11 @@ function setMarker(feature, latlng) {
             success: function (data) {
 //                console.log('mapillary data', data[0]);
                 if (data.length == 0) {
-                    $('#' + klass).html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>');
+                    $('#mapillary_container').html('No images here. Take some with your phone, see <a href="http://www.mapillary.com" target="_blank">Mapillary</a>');
                 } else {
-                    $('#' + klass).html('<div id="mapillary_button" class="mapillary_button ' + klass + '"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image=' + data[0].key + '"/>');
+                    $('#mapillary_container').html('<div id="mapillary_button"></div><iframe height="300px" src="//www.mapillary.com/jsapi?showMap=false&showImage=true&image=' + data[0].key + '"/>');
                 }
+                $('#' + klass).html('');
             }
         });
     });
