@@ -144,6 +144,7 @@ function init() {
                         console.log('Ready to produce upload link');
                         $('#submit_button_link').attr("href", magnusurl);
                         $('#submit_button').html('Click link to upload as: <br /><font size="2">' + destFile + '</font>');
+                        $('#upload_button').addClass('hidden');
                         $('#submit_button').removeClass('hidden');
 //                        $('#upload_button').html('Uploaded directly as <br /><font size="2">' + destFile + '</font>');
                     },
