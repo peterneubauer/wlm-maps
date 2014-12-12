@@ -139,7 +139,7 @@ function init() {
                             '|ca=' + parseddata.nodes[0].ca +
                             '}}';
                         var destFile = parseddata.nodes[0].location + ' - Mapillary (' + parseddata.nodes[0].key + ').jpg';
-                        var imageurl = parseddata.nodes[0].image.replace('thumb-1024.jpg', 'thumb-2048.jpg');  //request larger size
+                        var imageurl = parseddata.nodes[0].image.replace(' ', '_').replace('thumb-1024.jpg', 'thumb-2048.jpg');  //request larger size
                         var magnusurl = '//tools.wmflabs.org/url2commons/index.html?urls=' + imageurl + ' ' + destFile + '|' + encodeURIComponent(uploadDescription) + '&desc=$DESCRIPTOR$';
                         console.log('Ready to produce upload link');
                         $('#submit_button_link').attr("href", magnusurl);
