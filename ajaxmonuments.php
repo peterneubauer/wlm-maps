@@ -64,7 +64,12 @@ try {
     if ($mobile == '1'){
         $limit = 50;
     }
-    $sql="SELECT country, lang, id, name, lat, lon, image, commonscat, monument_article, monument_random FROM monuments_all WHERE lon>=:left AND lon<=:right AND lat>=:bottom AND lat<=:top ORDER BY monument_random LIMIT ".$limit;
+    $sql = "SELECT country, lang, id, name, lat, lon, image, commonscat, " .
+           "monument_article, municipality, address, source, project " .
+           "FROM monuments_all " .
+           "WHERE lon>=:left AND lon<=:right AND lat>=:bottom AND lat<=:top AND " .
+           "country like 'se-%' AND " . $imageCondition . " " .
+           "LIMIT " . $limit;
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':left', $left, PDO::PARAM_STR);
     $stmt->bindParam(':right', $right, PDO::PARAM_STR);
@@ -92,6 +97,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $prop=array();
     $prop['country']=$row['country'];
     $prop['lang']=$row['lang'];
+    $prop['project']=$row['project'];
     $prop['id']=$row['id'];
     $prop['name']=explode('|', $row['name']);
     $prop['name']=str_replace(array('[', ']'), '', $prop['name'][0]);

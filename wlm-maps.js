@@ -170,7 +170,7 @@ function setMarker(feature, latlng) {
     var popuptext;
     popuptext = '<table border=0 width=300px>';
     if (feature.properties.monument_article) {
-        popuptext += '<tr><td colspan=2><strong><a href="//' + feature.properties.lang + '.wikipedia.org/wiki/' + feature.properties.monument_article + '" target="_blank">' + feature.properties.name + '</a></strong></td></tr>';
+        popuptext += '<tr><td colspan=2><strong><a href="//' + feature.properties.lang + '.'+feature.properties.project+'.org/wiki/' + feature.properties.monument_article + '" target="_blank">' + feature.properties.name + '</a></strong></td></tr>';
     } else {
         popuptext += '<tr><td colspan=2><strong>' + feature.properties.name + '</strong></td></tr>';
     }
