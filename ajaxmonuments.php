@@ -65,10 +65,9 @@ try {
         $limit = 50;
     }
     $sql = "SELECT country, lang, id, name, lat, lon, image, commonscat, " .
-           "monument_article, municipality, address, source, project " .
+           "monument_article, project " .
            "FROM monuments_all " .
-           "WHERE lon>=:left AND lon<=:right AND lat>=:bottom AND lat<=:top AND " .
-           "country like 'se-%' AND " . $imageCondition . " " .
+           "WHERE lon>=:left AND lon<=:right AND lat>=:bottom AND lat<=:top " .
            "LIMIT " . $limit;
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':left', $left, PDO::PARAM_STR);
